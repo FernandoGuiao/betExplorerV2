@@ -10,4 +10,4 @@ WORKDIR /app
 COPY . .
 RUN composer install
 
-RUN php artisan serve
+RUN php artisan serve --host=.0.0.0.0 --port=8000
