@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.1-fpm-alpine
 
 RUN docker-php-ext-install pdo pdo_mysql sockets
 RUN curl -sS https://getcomposer.org/installer | php -- \
@@ -10,6 +10,6 @@ WORKDIR /app
 COPY . .
 RUN composer install
 
-RUN php artisan migrate
+RUN php artisan migrate -y
 
 RUN php artisan serve
