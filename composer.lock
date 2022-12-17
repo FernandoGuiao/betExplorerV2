@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccbd816a07b206f971042295b899d1ba",
+    "content-hash": "9ba072f4169335062954936b2b430fe5",
     "packages": [
         {
             "name": "brick/math",
@@ -1209,6 +1209,74 @@
             "time": "2022-09-08T13:45:54+00:00"
         },
         {
+            "name": "laravel/telescope",
+            "version": "v4.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "fcf4d360c003a1d27e2c1b298691645f8942943b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/fcf4d360c003a1d27e2c1b298691645f8942943b",
+                "reference": "fcf4d360c003a1d27e2c1b298691645f8942943b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0",
+                "php": "^7.3|^8.0",
+                "symfony/var-dumper": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "orchestra/testbench": "^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/v4.10.1"
+            },
+            "time": "2022-12-14T15:00:00+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.7.3",
             "source": {
@@ -1463,6 +1531,88 @@
                 }
             ],
             "time": "2022-12-11T20:36:23+00:00"
+        },
+        {
+            "name": "league/container",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/container.git",
+                "reference": "375d13cb828649599ef5d48a339c4af7a26cd0ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/container/zipball/375d13cb828649599ef5d48a339c4af7a26cd0ab",
+                "reference": "375d13cb828649599ef5d48a339c4af7a26cd0ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "psr/container": "^1.1 || ^2.0"
+            },
+            "provide": {
+                "psr/container-implementation": "^1.0"
+            },
+            "replace": {
+                "orno/di": "~2.0"
+            },
+            "require-dev": {
+                "nette/php-generator": "^3.4",
+                "nikic/php-parser": "^4.10",
+                "phpstan/phpstan": "^0.12.47",
+                "phpunit/phpunit": "^8.5.17",
+                "roave/security-advisories": "dev-latest",
+                "scrutinizer/ocular": "^1.8",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev",
+                    "dev-4.x": "4.x-dev",
+                    "dev-3.x": "3.x-dev",
+                    "dev-2.x": "2.x-dev",
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Container\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Bennett",
+                    "email": "mail@philbennett.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fast and intuitive dependency injection container.",
+            "homepage": "https://github.com/thephpleague/container",
+            "keywords": [
+                "container",
+                "dependency",
+                "di",
+                "injection",
+                "league",
+                "provider",
+                "service"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/container/issues",
+                "source": "https://github.com/thephpleague/container/tree/4.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/philipobenito",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-11-16T10:29:06+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2103,6 +2253,157 @@
                 }
             ],
             "time": "2022-10-28T22:51:32+00:00"
+        },
+        {
+            "name": "nutgram/hydrator",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nutgram/hydrator.git",
+                "reference": "7ca00bfb673cb2592d2e33158f6402cf35f1205d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nutgram/hydrator/zipball/7ca00bfb673cb2592d2e33158f6402cf35f1205d",
+                "reference": "7ca00bfb673cb2592d2e33158f6402cf35f1205d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "psr/container": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "league/container": "^4.2",
+                "phpunit/phpunit": "~9.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SergiX44\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergio Brighenti",
+                    "email": "sergio@brighenti.me",
+                    "homepage": "https://github.com/SergiX44"
+                },
+                {
+                    "name": "Anatoly Fenric",
+                    "email": "afenric@gmail.com",
+                    "homepage": "https://github.com/fenric"
+                }
+            ],
+            "description": "Hydrator for PHP 8.0+",
+            "homepage": "https://github.com/nutgram/hydrator",
+            "keywords": [
+                "data-mapper",
+                "dto",
+                "hydrator",
+                "jsonmapper",
+                "mapper",
+                "php8"
+            ],
+            "support": {
+                "issues": "https://github.com/nutgram/hydrator/issues",
+                "source": "https://github.com/nutgram/hydrator/tree/3.0.0"
+            },
+            "time": "2022-11-14T23:10:22+00:00"
+        },
+        {
+            "name": "nutgram/nutgram",
+            "version": "3.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nutgram/nutgram.git",
+                "reference": "737421ec5fa4fbc3e38a8b01e7d859d71f3ec245"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nutgram/nutgram/zipball/737421ec5fa4fbc3e38a8b01e7d859d71f3ec245",
+                "reference": "737421ec5fa4fbc3e38a8b01e7d859d71f3ec245",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "illuminate/macroable": "^8.0|^9.0",
+                "laravel/serializable-closure": "^1.2",
+                "league/container": "^4.2",
+                "nutgram/hydrator": "^3.0",
+                "php": ">=8.0",
+                "psr/log": "^1.0|^2.0|^3.0",
+                "psr/simple-cache": "^1.0|^2.0|^3.0"
+            },
+            "require-dev": {
+                "ext-reflection": "*",
+                "illuminate/testing": "^8.0|^9.0",
+                "netresearch/jsonmapper": "^4.0.0",
+                "orchestra/testbench": "^6.0|^7.0",
+                "pestphp/pest": "^1.1",
+                "pestphp/pest-plugin-mock": "^1.0",
+                "roave/security-advisories": "dev-latest",
+                "vimeo/psalm": "^4.11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SergiX44\\Nutgram\\NutgramServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SergiX44\\Nutgram\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergio Brighenti",
+                    "email": "sergio@brighenti.me",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Luca Patera",
+                    "email": "luca.patera@outlook.it",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The Telegram bot library that doesn't drive you nuts",
+            "homepage": "https://github.com/SergiX44/Nutgram",
+            "keywords": [
+                "api",
+                "bot",
+                "framework",
+                "laravel",
+                "library",
+                "nutgram",
+                "telegram"
+            ],
+            "support": {
+                "issues": "https://github.com/nutgram/nutgram/issues",
+                "source": "https://github.com/nutgram/nutgram/tree/3.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Lukasss93",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/SergiX44",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-17T13:29:44+00:00"
         },
         {
             "name": "phpoption/phpoption",
