@@ -10,6 +10,4 @@ WORKDIR /app
 COPY . .
 RUN composer install
 
-RUN php artisan migrate -y
-
 RUN php artisan serve
