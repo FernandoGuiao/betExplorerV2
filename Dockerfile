@@ -6,7 +6,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apk --update add --no-cache bash  dos2unix
+RUN apk --update add --no-cache bash dos2unix
 COPY . .
 
 RUN composer install
@@ -17,6 +17,13 @@ RUN npm run build
 EXPOSE 8000
 
 CMD php artisan serve --host=0.0.0.0 --port=8000
+
+ADD crontab.txt /crontab.txt
+COPY entry.sh /entry.sh
+RUN chmod 755  /entry.sh
+RUN /usr/bin/crontab /crontab.txt
+
+CMD ["/entry.sh"]
 
 #WORKDIR /usr/scheduler
 
