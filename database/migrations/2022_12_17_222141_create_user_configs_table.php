@@ -31,7 +31,7 @@ return new class extends Migration
             $table->tinyInteger('min_sum_red')->nullable();
             $table->tinyInteger('max_sum_red')->nullable();
 
-            $table->integer('activated_count');
+            $table->integer('activated_count')->default(0);
             
             $table->boolean('status');
 

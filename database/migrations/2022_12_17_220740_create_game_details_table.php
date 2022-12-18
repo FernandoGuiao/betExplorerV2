@@ -38,6 +38,8 @@ return new class extends Migration
 
             $table->tinyInteger('home_yellow');
             $table->tinyInteger('guest_yellow');
+            
+            $table->boolean('status')->default(false);
 
             $table->timestamps();
         });
