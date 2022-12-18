@@ -8,7 +8,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apk --update add --no-cache bash  dos2unix
 COPY . .
-RUN apk add mysql mysql-client
 
 RUN composer install
 RUN apk add --update npm
@@ -19,16 +18,16 @@ EXPOSE 8000
 
 CMD php artisan serve --host=0.0.0.0 --port=8000
 
-WORKDIR /usr/scheduler
+#WORKDIR /usr/scheduler
 
-# Copy files
-COPY crontab.* ./
-COPY start.sh .
-
-# Fix line endings && execute permissions
-RUN dos2unix crontab.* \
-    && \
-    find . -type f -iname "*.sh" -exec chmod +x {} \;
-
-# Run cron on container startup
-CMD ["./start.sh"]
+## Copy files
+#COPY crontab.* ./
+#COPY start.sh .
+#
+## Fix line endings && execute permissions
+#RUN dos2unix crontab.* \
+#    && \
+#    find . -type f -iname "*.sh" -exec chmod +x {} \;
+#
+## Run cron on container startup
+#CMD ["./start.sh"]
