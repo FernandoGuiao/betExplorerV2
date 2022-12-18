@@ -30,7 +30,7 @@ class UpdateGames extends Command
     public function handle()
     {
 
-        $data = file_get_contents('https://lv.scorebing.com/ajax/score/data');
+        $data = file_get_contents(env('DATA_URL'));
         $obj = json_decode($data);
 
         foreach($obj->rs as $row){
