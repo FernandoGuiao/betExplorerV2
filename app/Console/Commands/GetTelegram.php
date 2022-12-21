@@ -34,19 +34,21 @@ class GetTelegram extends Command
         $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         $updates = $bot->getUpdates();
         foreach ($updates as $update) {
-            User::updateOrCreate(
-                ['id' => $update->message->from->id],
-                [
-                    'id' => $update->message->from->id,
-                    'name' => $update->message->from->first_name . ($update->message->from->last_name ? " " . $update->message->from->last_name : ""),
-                ]
-            );
-
-            $telegram = TelegramUpdate::updateOrCreate(['id'=>$update->update_id], [
-                'telegram_user_id' => $update->message->from->id,
-                'name' => $update->message->from->first_name,
-                'chat' => $update->message->text
-            ]);
+            if(isset($update->message->from)){
+                User::updateOrCreate(
+                    ['id' => $update->message->from->id],
+                    [
+                        'id' => $update->message->from->id,
+                        'name' => $update->message->from->first_name . ($update->message->from->last_name ? " " . $update->message->from->last_name : ""),
+                    ]
+                );
+    
+                $telegram = TelegramUpdate::updateOrCreate(['id'=>$update->update_id], [
+                    'telegram_user_id' => $update->message->from->id,
+                    'name' => $update->message->from->first_name,
+                    'chat' => $update->message->text
+                ]);
+            }
         }
 
         return Command::SUCCESS;
