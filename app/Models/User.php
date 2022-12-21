@@ -34,11 +34,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts()
-    {
-        User::updateOrCreate([
-            'name' => 'John Doe',
-            'email' => 'k'
-        ]);
+    function userConfig(){
+        return $this->hasMany(UserConfig::class);
     }
 }

@@ -41,6 +41,7 @@ class GetTelegram extends Command
                     'name' => $update->message->from->first_name . ($update->message->from->last_name ? " " . $update->message->from->last_name : ""),
                 ]
             );
+
             $telegram = TelegramUpdate::updateOrCreate(['id'=>$update->update_id], [
                 'telegram_user_id' => $update->message->from->id,
                 'name' => $update->message->from->first_name,
