@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\TelegramQueue;
 
 use SergiX44\Nutgram\Nutgram;
+use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
 use SergiX44\Nutgram\Telegram\Types\Message\Message;
 
 class SendTelegram extends Command
@@ -34,7 +35,12 @@ class SendTelegram extends Command
         $queue = TelegramQueue::where(['status'=>0])->get();
         $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         foreach($queue as $row){
-            $message = $bot->sendMessage($row->chat, ['chat_id' => $row->telegram_user_id]);
+            $message = $bot->sendMessage(
+                $row->chat,
+                [
+                    'chat_id' => $row->telegram_user_id,
+                    'parse_mode' => ParseMode::HTML,
+                ]);
             $row->status = 1;
             $row->save();
         }
