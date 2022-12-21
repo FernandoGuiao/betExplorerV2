@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
+use App\Telegram\Middleware\MustBeRegisteredMiddleware;
 use Illuminate\Console\Command;
 use SergiX44\Nutgram\Nutgram;
 use App\Models\TelegramUpdate;
@@ -32,6 +34,13 @@ class GetTelegram extends Command
         $bot = new Nutgram(env('BOT_TOKEN'));
         $updates = $bot->getUpdates();
         foreach ($updates as $update) {
+            User::updateOrCreate(
+                ['id' => $update->message->from->id],
+                [
+                    'id' => $update->message->from->id,
+                    'name' => $update->message->from->first_name . ($update->message->from->last_name ? " " . $update->message->from->last_name : ""),
+                ]
+            );
             $telegram = TelegramUpdate::updateOrCreate(['id'=>$update->update_id], [
                 'telegram_user_id' => $update->message->from->id,
                 'name' => $update->message->from->first_name,
