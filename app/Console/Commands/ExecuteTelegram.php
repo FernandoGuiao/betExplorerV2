@@ -39,6 +39,7 @@ class ExecuteTelegram extends Command
             switch($command[0]){
                 case '/newConfig':                
                         UserConfig::create([
+                        'user_Id' => $row->telegram_user_id,
                         'min_time' => isset($command[1])?$command[1]:null,
                         'max_time' => isset($command[2])?$command[2]:null,
                         'min_sum_shoots' => isset($command[3])?$command[3]:null,
