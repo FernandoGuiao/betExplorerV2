@@ -22,13 +22,13 @@ processes = []
   DB_DATABASE = "bet_explorer"
   DB_USERNAME = "root"
   DB_PASSWORD = "root"
+  BOT_TOKEN = "830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw"
+  DATA_URL = "https://lv.scorebing.com/ajax/score/data"
   VITE_PUSHER_APP_KEY = "${PUSHER_APP_KEY}"
   VITE_PUSHER_HOST = "${PUSHER_HOST}"
   VITE_PUSHER_PORT = "${PUSHER_PORT}"
   VITE_PUSHER_SCHEME = "${PUSHER_SCHEME}"
   VITE_PUSHER_APP_CLUSTER = "${PUSHER_APP_CLUSTER}"
-  BOT_TOKEN = "830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw"
-  DATA_URL = "https://lv.scorebing.com/ajax/score/data"
 
 [experimental]
   allowed_public_ports = []
