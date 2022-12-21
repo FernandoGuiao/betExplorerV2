@@ -31,7 +31,7 @@ class GetTelegram extends Command
      */
     public function handle()
     {
-        $bot = new Nutgram(env('BOT_TOKEN'));
+        $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         $updates = $bot->getUpdates();
         foreach ($updates as $update) {
             User::updateOrCreate(

@@ -32,7 +32,7 @@ class SendTelegram extends Command
     public function handle()
     {
         $queue = TelegramQueue::where(['status'=>0])->get();
-        $bot = new Nutgram(env('BOT_TOKEN'));
+        $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         foreach($queue as $row){
             $message = $bot->sendMessage($row->chat, ['chat_id' => $row->telegram_user_id]);
             $row->status = 1;
