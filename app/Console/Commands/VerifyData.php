@@ -39,7 +39,7 @@ class VerifyData extends Command
             $sum_red = $row->home_red+$row->guest_red;
 
 
-            $configs = DB::select( DB::raw("SELECT * FROM user_configs 
+            $configs = DB::select( DB::raw("SELECT * FROM user_configs
                 WHERE (min_time is null OR min_time <= '$row->time') AND
                 (max_time is null OR max_time >= '$row->time') AND
                 (min_sum_shoots is null OR min_sum_shoots <= '$sum_shoots') AND
@@ -57,14 +57,14 @@ class VerifyData extends Command
             foreach($configs as $config){
 
                 $message =
-                    "⏱   <b>$row->time</b>" . PHP_EOL .
-                    "🏆   <b><u>$row->game->league</u></b>" . PHP_EOL .
-                    "👕   <b>$row->home_goal</b> - $row->game->home" . PHP_EOL .
-                    "👕   <b>$row->guest_goal</b> - $row->game->guest" . PHP_EOL . PHP_EOL .
+                    "⏱   <b>" . $row->time . " </b>" . PHP_EOL .
+                    "🏆   <b><u>" . $row->game->league . "</u></b>" . PHP_EOL .
+                    "👕   <b>" . $row->home_goal . "</b> - " . $row->game->home . PHP_EOL .
+                    "👕   <b>" . $row->guest_goal . "</b> - " . $row->game->guest . PHP_EOL . PHP_EOL .
 
-                    "🔸   Escanteios: $row->home_corner <b>x</b> $row->guest_corner" . PHP_EOL .
-                    "🔸   Chute a gol: $row->home_on_target <b>x</b> $row->guest_on_target" . PHP_EOL .
-                    "🔸   Chute para fora: $row->home_off_target <b>x</b> $row->guest_off_target";
+                    "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
+                    "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
+                    "🔸   Chute para fora:" . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
 
                 TelegramQueue::create([
                     'telegram_user_id' => $config->user_id,
