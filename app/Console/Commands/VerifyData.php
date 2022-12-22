@@ -7,7 +7,7 @@ use App\Models\Game;
 use App\Models\GameDetail;
 use App\Models\UserConfig;
 use App\Models\TelegramQueue;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class VerifyData extends Command
 {
@@ -64,7 +64,7 @@ class VerifyData extends Command
 
                     "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
                     "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
-                    "🔸   Chute para fora:" . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
+                    "🔸   Chute para fora: " . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
 
                 TelegramQueue::create([
                     'telegram_user_id' => $config->user_id,
