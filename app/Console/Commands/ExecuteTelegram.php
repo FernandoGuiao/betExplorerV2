@@ -67,6 +67,8 @@ class ExecuteTelegram extends Command
                     UserConfig::where('user_id', $row->telegram_user_id)->delete();
                     $message = 'Configurações removidas com sucesso';
                 break;
+                // case '/deleteConfig':
+                //     break;
                 case '/help':
                     $message = "/newConfig [name] [min_time] [max_time] [min_sum_goals] [max_sum_goals] [min_sum_shoots] [max_sum_shoots] [min_sum_corners] [max_sum_corners] [min_sum_red] [max_sum_red] \n/clearConfig";
                     break;
