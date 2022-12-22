@@ -37,11 +37,14 @@ class VerifyData extends Command
             $sum_shoots = $row->home_on_target+$row->home_off_target+$row->guest_on_target+$row->guest_off_target;
             $sum_corners = $row->home_corner+$row->guest_corner;
             $sum_red = $row->home_red+$row->guest_red;
+            $sum_goals = $row->home_goal+$row->guest_goal;
 
 
             $configs = DB::select( DB::raw("SELECT * FROM user_configs
                 WHERE (min_time is null OR min_time <= '$row->time') AND
                 (max_time is null OR max_time >= '$row->time') AND
+                (min_sum_goals is null OR min_sum_goals <= '$sum_goals') AND
+                (max_sum_goals is null OR max_sum_goals >= '$sum_goals') AND
                 (min_sum_shoots is null OR min_sum_shoots <= '$sum_shoots') AND
                 (max_sum_shoots is null OR max_sum_shoots >= '$sum_shoots') AND
                 (min_sum_corners is null OR min_sum_corners <= '$sum_corners') AND

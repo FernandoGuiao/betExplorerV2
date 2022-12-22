@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use SergiX44\Nutgram\Nutgram;
 use App\Models\TelegramUpdate;
 use App\Models\UserConfig;
+use App\Models\TelegramQueue;
 
 class ExecuteTelegram extends Command
 {
@@ -33,6 +34,8 @@ class ExecuteTelegram extends Command
     public function handle()
     {
         $telegram_updates = TelegramUpdate::where(['status'=>0])->get();
+        $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
+
         foreach($telegram_updates as $row){
             $command = explode(' ', $row->chat);
 
@@ -53,11 +56,22 @@ class ExecuteTelegram extends Command
                         'max_sum_red' => isset($command[11])&&$command[11]!='-'?$command[11]:null,
                         'status' => 1,
                     ]);
+                    $message = 'Configuração criada com sucesso';
                     break;
                 case '/clearConfig':                
                     UserConfig::where('user_id', $row->telegram_user_id)->delete();
+                    $message = 'Configurações removidas com sucesso';
                 break;
+                case '/help':
+                    $message = "/newConfig [name] [min_time] [max_time] [min_sum_goals] [max_sum_goals] [min_sum_shoots] [max_sum_shoots] [min_sum_corners] [max_sum_corners] [min_sum_red] [max_sum_red] \n/clearConfig";
+                    break;
             }
+
+            TelegramQueue::create([
+                'telegram_user_id' => $row->telegram_user_id,
+                'chat' => $message
+            ]);
+
             $row->status = 1;
             $row->save();
         }
