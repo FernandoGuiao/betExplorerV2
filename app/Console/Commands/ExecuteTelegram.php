@@ -42,6 +42,8 @@ class ExecuteTelegram extends Command
             $row->status = 1;
             $row->save();
 
+            $message =  '';
+
             switch($command[0]){
                 case '/newConfig':                
                         UserConfig::create([
