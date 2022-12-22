@@ -41,8 +41,7 @@ class VerifyData extends Command
             $sum_goals = $row->home_goal+$row->guest_goal;
 
 
-            $configs = DB::select( DB::raw("SELECT A.*, B.id as user_config FROM user_configs A
-                LEFT JOIN game_user_configs B ON (A.id = B.user_config_id)
+            $configs = DB::select( DB::raw("SELECT A.* FROM user_configs A
                 WHERE (min_time is null OR min_time <= '$row->time') AND
                 (max_time is null OR max_time >= '$row->time') AND
                 (min_sum_goals is null OR min_sum_goals <= '$sum_goals') AND
@@ -52,7 +51,7 @@ class VerifyData extends Command
                 (min_sum_corners is null OR min_sum_corners <= '$sum_corners') AND
                 (max_sum_corners is null OR max_sum_corners >= '$sum_corners') AND
                 (min_sum_red is null OR min_sum_red <= '$sum_red') AND
-                (max_sum_red is null OR max_sum_red >= '$sum_red') AND B.id IS null AND A.status = 1
+                (max_sum_red is null OR max_sum_red >= '$sum_red') AND A.status = 1
             "));
 
             // $configs = UserConfig::where('min_time', '<=', $row->time)
@@ -61,26 +60,34 @@ class VerifyData extends Command
             // ->get();
             foreach($configs as $config){
 
-                $message =
-                    "🔸   <b>Configuração: " . $config->name . " </b>" . PHP_EOL .
-                    "⏱   <b>" . $row->time . " </b>" . PHP_EOL .
-                    "🏆   <b><u>" . $row->game->league . "</u></b>" . PHP_EOL .
-                    "👕   <b>" . $row->home_goal . "</b> - " . $row->game->home . PHP_EOL .
-                    "👕   <b>" . $row->guest_goal . "</b> - " . $row->game->guest . PHP_EOL . PHP_EOL .
-
-                    "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
-                    "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
-                    "🔸   Chute para fora: " . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
-
-                TelegramQueue::create([
-                    'telegram_user_id' => $config->user_id,
-                    'chat' => $message
-                ]);
-
-                GameUserConfig::create([
+                $game_config = GameUserConfig::where([
                     'user_config_id' => $config->id,
                     'game_id' => $row->game->id
-                ]);
+                ])->first();
+
+                if(!$game_config || !$game_config->id){
+                    $message =
+                        "🔸   <b>Configuração: " . $config->name . " </b>" . PHP_EOL .
+                        "⏱   <b>" . $row->time . " </b>" . PHP_EOL .
+                        "🏆   <b><u>" . $row->game->league . "</u></b>" . PHP_EOL .
+                        "👕   <b>" . $row->home_goal . "</b> - " . $row->game->home . PHP_EOL .
+                        "👕   <b>" . $row->guest_goal . "</b> - " . $row->game->guest . PHP_EOL . PHP_EOL .
+    
+                        "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
+                        "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
+                        "🔸   Chute para fora: " . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
+    
+                    TelegramQueue::create([
+                        'telegram_user_id' => $config->user_id,
+                        'chat' => $message
+                    ]);
+    
+                    GameUserConfig::create([
+                        'user_config_id' => $config->id,
+                        'game_id' => $row->game->id
+                    ]);
+                }
+
             }
             $row->status = 1;
             $row->save();
