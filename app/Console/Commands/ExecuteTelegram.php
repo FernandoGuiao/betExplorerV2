@@ -38,6 +38,9 @@ class ExecuteTelegram extends Command
 
         foreach($telegram_updates as $row){
             $command = explode(' ', $row->chat);
+            
+            $row->status = 1;
+            $row->save();
 
             switch($command[0]){
                 case '/newConfig':                
@@ -72,8 +75,6 @@ class ExecuteTelegram extends Command
                 'chat' => $message
             ]);
 
-            $row->status = 1;
-            $row->save();
         }
 
         return Command::SUCCESS;
