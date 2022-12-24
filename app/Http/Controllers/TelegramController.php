@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Handlers\ConfigHandler;
 use App\Http\Middleware\Telegram\MustBeRegisteredMiddleware;
+use Illuminate\Support\Facades\Log;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use SergiX44\Nutgram\Nutgram;
@@ -17,18 +18,36 @@ class TelegramController
      */
     public function webhook(Nutgram $bot): void
     {
+        Log::info('webhook init');
         $bot->setRunningMode(Webhook::class);
 
         $bot->middleware(MustBeRegisteredMiddleware::class);
+        Log::info('middleware passed');
 
-        $bot->onCommand('/newConfig {param}', [ConfigHandler::class, 'new'])
+        $bot->onCommand('start', function ($bot) {
+            Log::info('User ' . $bot->user()->first_name . ' started the bot');
+            $bot->sendMessage('Olá, ' . $bot->user()->first_name . '!');
+            $bot->sendMessage('Utilize o menu de comandos para saber como utilizar o bot');
+        });
+
+        $bot->onCommand('newConfig', [ConfigHandler::class, 'help']);
+
+        $bot->onCommand('newConfig {param}', [ConfigHandler::class, 'new'])
             ->description('Cria nova configuração de alerta');
 
-        $bot->onCommand('/clearConfig', [ConfigHandler::class, 'clear'])
+        $bot->onCommand('clearConfig', [ConfigHandler::class, 'clear'])
             ->description('Limpa todas as configurações de alerta');
+
+        $bot->onCommand('help', [ConfigHandler::class, 'help'])
+            ->description('Mostra ajuda sobre configurações de alerta');
 
         $bot->registerMyCommands();
 
         $bot->run();
+    }
+
+    public function webhookTest(\Illuminate\Http\Request $request): void
+    {
+        response()->json($request->all());
     }
 }
