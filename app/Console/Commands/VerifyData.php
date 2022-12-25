@@ -67,21 +67,21 @@ class VerifyData extends Command
 
                 if(!$game_config || !$game_config->id){
                     $message =
-                        "🔸   <b>Configuração: " . $config->name . " </b>" . PHP_EOL .
+                        "📝   <b>Configuração: " . $config->name . " </b>" . PHP_EOL .
                         "⏱   <b>" . $row->time . " </b>" . PHP_EOL .
                         "🏆   <b><u>" . $row->game->league . "</u></b>" . PHP_EOL .
                         "👕   <b>" . $row->home_goal . "</b> - " . $row->game->home . PHP_EOL .
                         "👕   <b>" . $row->guest_goal . "</b> - " . $row->game->guest . PHP_EOL . PHP_EOL .
-    
+
                         "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
                         "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
                         "🔸   Chute para fora: " . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
-    
+
                     TelegramQueue::create([
                         'telegram_user_id' => $config->user_id,
                         'chat' => $message
                     ]);
-    
+
                     GameUserConfig::create([
                         'user_config_id' => $config->id,
                         'game_id' => $row->game->id

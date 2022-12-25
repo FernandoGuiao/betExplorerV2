@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserConfig;
 use Illuminate\Support\Facades\Log;
 use SergiX44\Nutgram\Nutgram;
+use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
 
 class ConfigHandler
 {
@@ -41,9 +42,31 @@ class ConfigHandler
 
     public function clear(Nutgram $bot): void
     {
-        UserConfig::where('user_id', $bot->userId())->delete();
 
         $bot->sendMessage("❎ Configurações apagadas!");
+    }
+
+    public function show(Nutgram $bot): void
+    {
+        $configs = UserConfig::where('user_id', $bot->userId())->get();
+
+        foreach ($configs as $config) {
+            $bot->sendMessage(
+            "📝 <b>" . ($config->name ?? "X") . "</b>". PHP_EOL . PHP_EOL .
+               "⏱ Tempo: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL .
+               "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
+               "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
+               "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
+               "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
+                [
+                    'parse_mode' => ParseMode::HTML
+                ]
+            );
+        }
+
+        if (count($configs) == 0) {
+            $bot->sendMessage("❌ Você não possui configurações!");
+        }
     }
 
     public function help(Nutgram $bot): void

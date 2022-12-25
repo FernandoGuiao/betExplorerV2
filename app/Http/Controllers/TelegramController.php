@@ -38,6 +38,9 @@ class TelegramController
         $bot->onCommand('clearConfig', [ConfigHandler::class, 'clear'])
             ->description('Limpa todas as configurações de alerta');
 
+        $bot->onCommand('showConfigs', [ConfigHandler::class, 'show'])
+            ->description('Mostra todas as configurações de alerta');
+
         $bot->onCommand('help', [ConfigHandler::class, 'help'])
             ->description('Mostra ajuda sobre configurações de alerta');
 
