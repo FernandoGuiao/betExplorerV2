@@ -42,6 +42,7 @@ class ConfigHandler
 
     public function clear(Nutgram $bot): void
     {
+        UserConfig::where('user_id', $bot->user()->id)->delete();
 
         $bot->sendMessage("❎ Configurações apagadas!");
     }
