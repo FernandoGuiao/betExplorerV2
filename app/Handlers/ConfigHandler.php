@@ -25,12 +25,16 @@ class ConfigHandler
                 'max_time' => isset($command[2]) && $command[2] != '-' ? $command[2] : null,
                 'min_sum_goals' => isset($command[3]) && $command[3] != '-' ? $command[3] : null,
                 'max_sum_goals' => isset($command[4]) && $command[4] != '-' ? $command[4] : null,
-                'min_sum_shoots' => isset($command[5]) && $command[5] != '-' ? $command[5] : null,
-                'max_sum_shoots' => isset($command[6]) && $command[6] != '-' ? $command[6] : null,
-                'min_sum_corners' => isset($command[7]) && $command[7] != '-' ? $command[7] : null,
-                'max_sum_corners' => isset($command[8]) && $command[8] != '-' ? $command[8] : null,
-                'min_sum_red' => isset($command[9]) && $command[9] != '-' ? $command[9] : null,
-                'max_sum_red' => isset($command[10]) && $command[10] != '-' ? $command[10] : null,
+                'min_diff_goals' => isset($command[5]) && $command[5] != '-' ? $command[5] : null,
+                'max_diff_goals' => isset($command[6]) && $command[6] != '-' ? $command[6] : null,
+                'min_sum_shoots' => isset($command[7]) && $command[7] != '-' ? $command[7] : null,
+                'max_sum_shoots' => isset($command[8]) && $command[8] != '-' ? $command[8] : null,
+                'min_sum_shoots_on_target' => isset($command[9]) && $command[9] != '-' ? $command[9] : null,
+                'max_sum_shoots_on_target' => isset($command[10]) && $command[10] != '-' ? $command[10] : null,
+                'min_sum_corners' => isset($command[11]) && $command[11] != '-' ? $command[11] : null,
+                'max_sum_corners' => isset($command[12]) && $command[12] != '-' ? $command[12] : null,
+                'min_sum_red' => isset($command[13]) && $command[13] != '-' ? $command[13] : null,
+                'max_sum_red' => isset($command[14]) && $command[14] != '-' ? $command[14] : null,
                 'status' => 1,
             ]);
 
@@ -56,7 +60,9 @@ class ConfigHandler
             "📝 <b>" . ($config->name ?? "X") . "</b>". PHP_EOL . PHP_EOL .
                "⏱ Tempo: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL .
                "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
+               "🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
                "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
+               "⚽ Chutes no gol: " . ($config->min_sum_shoots_on_target ?? "X") . " - " . ($config->max_sum_shoots_on_target ?? "X") . PHP_EOL .
                "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
                "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
                 [
@@ -75,7 +81,8 @@ class ConfigHandler
         $bot->sendMessage(
             "<b>Para criar nova configuração de alerta envie o comando '/newConfig' seguido dos filtros:</b>" . PHP_EOL  . PHP_EOL . PHP_EOL .
             "/newConfig [nome da configuração] [mínimo de tempo] [máximo de tempo] [mínimo soma de gols] [máximo soma de gols] " .
-            "[mínimo soma de de chutes] [max de soma de chutes] [mínimo de soma de escanteios] [máximo de soma de escanteios] " .
+            "[mínimo de diferença de gols] [máximo de diferença de gols] [mínimo soma de chutes] [max de soma de chutes] " .
+            "[mínimo soma de chutes ao gol] [max de soma de chutes ao gol] [mínimo de soma de escanteios] [máximo de soma de escanteios] " .
             "[mínimo soma de cartões vermelhos] [máximo soma de cartões vermelhos]",
             [
                 'parse_mode' => 'HTML'
