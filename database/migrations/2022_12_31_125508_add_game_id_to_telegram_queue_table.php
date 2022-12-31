@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::table('telegram_queue', function (Blueprint $table) {
             $table->foreignId('game_id')->after('id')->nullable();
-            $table->foreign('game_id')->references('id')->on('games');
         });
     }
 
@@ -27,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('telegram_queue', function (Blueprint $table) {
-            //
+            $table->removeColumn('game_id');
         });
     }
 };
