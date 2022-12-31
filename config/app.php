@@ -213,4 +213,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'max_fails' => 30,
+
 ];

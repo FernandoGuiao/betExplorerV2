@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Models\TelegramQueue;
 
@@ -32,17 +33,22 @@ class SendTelegram extends Command
      */
     public function handle()
     {
-        $queue = TelegramQueue::where(['status'=>0])->get();
+        $queue = TelegramQueue::where('status' , 0)->where('created_at', '>', Carbon::now()->subDays(1))->get();
         $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         foreach($queue as $row){
-            $message = $bot->sendMessage(
-                $row->chat,
-                [
-                    'chat_id' => $row->telegram_user_id,
-                    'parse_mode' => ParseMode::HTML,
-                ]);
-            $row->status = 1;
-            $row->save();
+            try {
+                $message = $bot->sendMessage(
+                    $row->chat,
+                    [
+                        'chat_id' => $row->telegram_user_id,
+                        'parse_mode' => ParseMode::HTML,
+                    ]);
+                $row->status = 1;
+                $row->save();
+            } catch (\Throwable $th) {
+                $row->status = 9;
+                $row->save();
+            }
         }
 
         return Command::SUCCESS;
