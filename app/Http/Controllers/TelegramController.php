@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Handlers\ConfigHandler;
+use App\Handlers\GameHandler;
 use App\Http\Middleware\Telegram\MustBeRegisteredMiddleware;
+use App\Telegram\Handlers\VetoPresidentHandler;
 use Illuminate\Support\Facades\Log;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -44,6 +46,7 @@ class TelegramController
         $bot->onCommand('help', [ConfigHandler::class, 'help'])
             ->description('Mostra ajuda sobre configurações de alerta');
 
+        $bot->onCallbackQueryData('gameStatusNow {param}', [GameHandler::class, 'gameStatusNow']);
         $bot->registerMyCommands();
 
         $bot->run();

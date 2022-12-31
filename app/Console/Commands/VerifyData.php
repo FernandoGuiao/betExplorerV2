@@ -60,10 +60,6 @@ class VerifyData extends Command
                 (max_sum_red is null OR max_sum_red >= '$sum_red') AND A.status = 1
             "));
 
-            // $configs = UserConfig::where('min_time', '<=', $row->time)
-            // ->where('max_time', '>=', $row->time)
-            // ->where('min_sum_shoots', '<=', ($sum_shoots))
-            // ->get();
             foreach($configs as $config){
 
                 $game_config = GameUserConfig::where([
@@ -72,20 +68,13 @@ class VerifyData extends Command
                 ])->first();
 
                 if(!$game_config || !$game_config->id){
-                    $message =
-                        "📝   <b>Configuração: " . $config->name . " </b>" . PHP_EOL .
-                        "⏱   <b>" . $row->time . " </b>" . PHP_EOL .
-                        "🏆   <b><u>" . $row->game->league . "</u></b>" . PHP_EOL .
-                        "👕   <b>" . $row->home_goal . "</b> - " . $row->game->home . PHP_EOL .
-                        "👕   <b>" . $row->guest_goal . "</b> - " . $row->game->guest . PHP_EOL . PHP_EOL .
 
-                        "🔸   Escanteios: " . $row->home_corner . " <b>x </b> " . $row->guest_corner . PHP_EOL .
-                        "🔸   Chute a gol: " . $row->home_on_target . " <b>x</b> " . $row->guest_on_target . PHP_EOL .
-                        "🔸   Chute para fora: " . $row->home_off_target . " <b>x</b> " . $row->guest_off_target;
+                    $message = $this->makeMessage($row, $config);
 
                     TelegramQueue::create([
                         'telegram_user_id' => $config->user_id,
-                        'chat' => $message
+                        'chat' => $message,
+                        'game_id' => $row->game->id
                     ]);
 
                     GameUserConfig::create([
@@ -99,5 +88,24 @@ class VerifyData extends Command
             $row->save();
         }
         return Command::SUCCESS;
+    }
+
+    public static function makeMessage(mixed $gameDetails, mixed $userConfig = null) : string
+    {
+        $message = '';
+        if($userConfig){
+            $message =  "📝   <b>Configuração: " . $userConfig->name . " </b>" . PHP_EOL;
+        }
+        $message =  $message .
+        "⏱   <b>" . $gameDetails->time . " </b>" . PHP_EOL .
+        "🏆   <b><u>" . $gameDetails->game->league . "</u></b>" . PHP_EOL .
+        "👕   <b>" . $gameDetails->home_goal . "</b> - " . $gameDetails->game->home . PHP_EOL .
+        "👕   <b>" . $gameDetails->guest_goal . "</b> - " . $gameDetails->game->guest . PHP_EOL . PHP_EOL .
+
+        "🔸   Escanteios: " . $gameDetails->home_corner . " <b>x</b> " . $gameDetails->guest_corner . PHP_EOL .
+        "🔸   Chute a gol: " . $gameDetails->home_on_target . " <b>x</b> " . $gameDetails->guest_on_target . PHP_EOL .
+        "🔸   Chute para fora: " . $gameDetails->home_off_target . " <b>x</b> " . $gameDetails->guest_off_target;
+
+        return $message;
     }
 }

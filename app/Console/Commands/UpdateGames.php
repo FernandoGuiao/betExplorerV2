@@ -115,7 +115,7 @@ class UpdateGames extends Command
         foreach ($users as $user) {
             TelegramQueue::create([
                 'telegram_user_id' => $user->id,
-                'chat' => $message
+                'chat' => $message,
             ]);
         }
     }

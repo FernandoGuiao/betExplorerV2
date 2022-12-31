@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Models\TelegramQueue;
 
@@ -33,16 +32,33 @@ class SendTelegram extends Command
      */
     public function handle()
     {
-        $queue = TelegramQueue::where('status' , 0)->where('created_at', '>', Carbon::now()->subDays(1))->get();
+        $queue = TelegramQueue::where(['status'=>0])->get();
         $bot = new Nutgram(env('BOT_TOKEN', '830113645:AAGSt94gcNzKjiHoHrQLSDeDUTGsBzSaGNw'));
         foreach($queue as $row){
             try {
-                $message = $bot->sendMessage(
-                    $row->chat,
-                    [
+
+                $options = [
                         'chat_id' => $row->telegram_user_id,
                         'parse_mode' => ParseMode::HTML,
-                    ]);
+                ];
+
+                if ($row->game_id) {
+                    $options['reply_markup'] = [
+                        'inline_keyboard' => [
+                            [
+                                ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id],
+                            ],
+//                            [
+//                                ['text' => 'Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id], // Colocar botão de ver últimos jogos dos times (time 1)
+//                                ['text' => 'Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id], // Colocar botão de ver últimos jogos dos times (time 2)
+//                            ],
+                        ],
+                    ];
+                }
+
+                $message = $bot->sendMessage(
+                    $row->chat, $options);
+
                 $row->status = 1;
                 $row->save();
             } catch (\Throwable $th) {
