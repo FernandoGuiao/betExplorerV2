@@ -37,6 +37,12 @@ class TelegramController
         $bot->onCommand('newConfig {param}', [ConfigHandler::class, 'new'])
             ->description('Cria nova configuração de alerta');
 
+        $bot->onCommand('paramTest {param}', [ConfigHandler::class, 'paramTest'])
+            ->description('Cria nova configuração de alerta');
+
+        $bot->onCommand('newWebConfig', [ConfigHandler::class, 'newWeb'])
+            ->description('Cria nova configuração de alerta pela web');
+
         $bot->onCommand('clearConfig', [ConfigHandler::class, 'clear'])
             ->description('Limpa todas as configurações de alerta');
 

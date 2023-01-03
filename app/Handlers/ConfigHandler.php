@@ -2,9 +2,8 @@
 
 namespace App\Handlers;
 
-use App\Models\Game;
-use App\Models\User;
 use App\Models\UserConfig;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
@@ -15,7 +14,7 @@ class ConfigHandler
     {
         $command = explode(' ', $param);
 
-        Log::info('ConfigHandler@join: ' . $param);
+        Log::info('ConfigHandler@new: ' . $param);
 
         try {
             UserConfig::create([
@@ -39,8 +38,48 @@ class ConfigHandler
             ]);
 
             $bot->sendMessage("✅ Nova configuração salva!");
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $bot->sendMessage("❌ Erro ao salvar configuração! Verifique os parâmetros e tente novamente.");
+        }
+    }
+
+    public function paramTest(Nutgram $bot, $param): void
+    {
+
+        Log::info('ConfigHandler@paramTest: ' . $param);
+
+
+        $bot->sendMessage("✅ " . $param);
+
+    }
+
+    public function newWeb(Nutgram $bot): void
+    {
+        Log::info('ConfigHandler@newWeb');
+
+        try {
+
+            $bot->sendMessage("✅ Nova configuração !",
+                [
+                    'parse_mode' => ParseMode::HTML,
+                    'reply_markup' => [
+                        'inline_keyboard' => [
+                            [
+                                [
+                                    'text' => 'Fazer Nova Config',
+                                    'web_app' => [
+                                        'url' => url('/') . '/new-config',
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            );
+
+        } catch (Exception $e) {
+            $bot->sendMessage("❌ Erro");
+            Log::error($e->getMessage(), $e->getTrace());
         }
     }
 
@@ -57,14 +96,14 @@ class ConfigHandler
 
         foreach ($configs as $config) {
             $bot->sendMessage(
-            "📝 <b>" . ($config->name ?? "X") . "</b>". PHP_EOL . PHP_EOL .
-               "⏱ Tempo: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL .
-               "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
-               "🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
-               "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
-               "⚽ Chutes no gol: " . ($config->min_sum_shoots_on_target ?? "X") . " - " . ($config->max_sum_shoots_on_target ?? "X") . PHP_EOL .
-               "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
-               "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
+                "📝 <b>" . ($config->name ?? "X") . "</b>" . PHP_EOL . PHP_EOL .
+                "⏱ Tempo: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL .
+                "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
+                "🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
+                "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
+                "⚽ Chutes no gol: " . ($config->min_sum_shoots_on_target ?? "X") . " - " . ($config->max_sum_shoots_on_target ?? "X") . PHP_EOL .
+                "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
+                "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
                 [
                     'parse_mode' => ParseMode::HTML
                 ]
@@ -79,7 +118,7 @@ class ConfigHandler
     public function help(Nutgram $bot): void
     {
         $bot->sendMessage(
-            "<b>Para criar nova configuração de alerta envie o comando '/newConfig' seguido dos filtros:</b>" . PHP_EOL  . PHP_EOL . PHP_EOL .
+            "<b>Para criar nova configuração de alerta envie o comando '/newConfig' seguido dos filtros:</b>" . PHP_EOL . PHP_EOL . PHP_EOL .
             "/newConfig [nome da configuração] [mínimo de tempo] [máximo de tempo] [mínimo soma de gols] [máximo soma de gols] " .
             "[mínimo de diferença de gols] [máximo de diferença de gols] [mínimo soma de chutes] [max de soma de chutes] " .
             "[mínimo soma de chutes ao gol] [max de soma de chutes ao gol] [mínimo de soma de escanteios] [máximo de soma de escanteios] " .
@@ -89,7 +128,7 @@ class ConfigHandler
             ]
         );
         $bot->sendMessage(
-            "<b>Exemplo para jogos entre 20 e 45 minutos que tenha no mínimo 3 gols e 6 escanteios:</b>" ,
+            "<b>Exemplo para jogos entre 20 e 45 minutos que tenha no mínimo 3 gols e 6 escanteios:</b>",
             [
                 'parse_mode' => 'HTML'
             ]

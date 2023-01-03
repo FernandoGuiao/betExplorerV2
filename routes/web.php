@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/new-config', function () {
+    return view('newConfig');
+});
+
+Route::post('/new-config', [ConfigController::class, 'store'])->name('newConfigStore');
+
+Route::get('/new-config-confirm', function () {
+    return view('newConfigConfirm');
+})->name('newConfigConfirm');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
