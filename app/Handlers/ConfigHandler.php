@@ -69,6 +69,8 @@ class ConfigHandler
                                     'text' => 'Fazer Nova Config',
                                     'web_app' => [
                                         'url' => url('/') . '/new-config',
+//                                        'url' => 'https://qab7qaxr3v.sharedwithexpose.com' . '/new-config',
+
                                     ]
                                 ]
                             ]

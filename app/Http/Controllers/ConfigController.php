@@ -9,8 +9,12 @@ class ConfigController extends Controller
 {
     public function store(Request $request)
     {
-        $config = UserConfig::create($request->all());
+        try {
+            $config = UserConfig::create($request->all());
 
-        return redirect('/new-config-confirm')->with('success', 'Config saved!');
+            return response()->json($config, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

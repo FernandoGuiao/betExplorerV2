@@ -28,7 +28,7 @@
     //set name to label
     console.log(userId);
     console.log(window.Telegram.WebApp.initDataUnsafe.user);
-    document.getElementById("user_id").value = userId;
+    // document.getElementById("user_id").value = userId;
 
 
     function getTime(){

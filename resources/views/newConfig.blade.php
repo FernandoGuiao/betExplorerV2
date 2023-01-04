@@ -14,13 +14,13 @@
 </head>
 
 <div class="container-sm text-center">
-<form action="{{ route('newConfigStore') }}" method="post">
+<form id="form">
     @csrf
     <div class="row text-lg text-center font-large  m-2 p-2">
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">  <br>
-                <label class="p-1 fw-bold">Minutos </label> <br>
+                <label class="p-1 fw-bold">Minutoss </label> <br>
             </div>
             <div style="display: flex">
                 <div class="me-2">
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon">  <br>
                 <label class="p-1 fw-bold">Chutes </label> <br>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon">  <br>
                 <label class="p-1 fw-bold">Gols </label> <br>
@@ -63,7 +63,7 @@
                 </div>
                 <div>
                     <label style="font-size: 10px" class="mb-1">max</label> <br>
-                    <input type="number" class="form-control" id="min_sum_goals" name="min_sum_goals"/>
+                    <input type="number" class="form-control" id="max_sum_goals" name="max_sum_goals"/>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
 {{--  segunda linha  --}}
 
     <div class="row text-lg text-center font-large  m-2 p-2">
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">  <br>
                 <label style="font-size: 12px" class="p-1 fw-bold">Chute a Gol </label> <br>
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon">  <br>
                 <label style="font-size: 12px" class="p-1 fw-bold">C. Verm. </label> <br>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon">  <br>
                 <label style="font-size: 12px" class="p-1 fw-bold">Escanteios </label> <br>
@@ -129,7 +129,7 @@
 
     <div class="row text-lg text-center font-large  m-2 p-2">
 
-        <div class="col-4 mt-1 p-3 rounded-4 block">
+        <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon">  <br>
                 <label style="font-size: 12px" class="p-1 fw-bold">Dif. Gols </label> <br>
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        <div class="col-8 mt-1 p-3 rounded-4 block">
+        <div class="col-8 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon">  <br>
                 <label style="font-size: 12px" class="p-1 fw-bold">Nome da configuração </label> <br>
@@ -160,8 +160,8 @@
 
     </div>
     <div class="row text-lg text-center font-large  m-2 p-2">
-        <div class="col-12 mt-1 p-3 rounded-4 block">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+        <div class="col-12 mt-1 p-1 rounded-4 block">
+            <button id="submitButton" class="btn btn-primary">Salvar</button>
         </div>
     </div>
     <input type="number" id="status" name="status" value=1 hidden/>
@@ -173,26 +173,50 @@
 
 
 <script>
-    console.log(window.Telegram.WebApp)
-    let name = window.Telegram.WebApp.initDataUnsafe.user.first_name;
-    let userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-    //set name to label
-    console.log(userId);
-    console.log(window.Telegram.WebApp.initDataUnsafe.user);
-    document.getElementById("user_id").value = userId;
-
-
-    function getTime(){
-        let time = document.getElementById("time-min").value;
-        console.log(time);
-        window.Telegram.WebApp.close();
+    console.log("telegramObject:",window.Telegram.WebApp)
+    try {
+        let name = window.Telegram.WebApp.initDataUnsafe.user.first_name;
+        let userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+        console.log(window.Telegram.WebApp.initDataUnsafe.user);
+        document.getElementById("user_id").value = userId;
+    } catch (error) {
+        console.log("error:",error)
     }
+    let form = document.getElementById("form");
+    console.log(form);
+    var formData = new FormData(form);
+    console.log(Object.fromEntries(formData));
 
-    function confirm(){
-        let time = document.getElementById("time-min").value;
-        console.log(time);
-        window.Telegram.WebApp.close();
-    }
+    document.getElementById("submitButton").addEventListener("click", function(event){
+        event.preventDefault()
+        console.log(event);
+        fetch('api/new-config', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            body: JSON.stringify(Object.fromEntries(formData))
+        }).then(
+            function(response) {
+                if (response.status !== 201) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    window.Telegram.WebApp.showAlert("Houve um erro ao salvar a configuração");
+                    return;
+                }
+
+
+                response.json().then(function(data) {
+                    window.Telegram.WebApp.showAlert("Configuração salva com sucesso!",  () => window.Telegram.WebApp.close());
+                    console.log(data);
+                });
+            }
+        )
+
+    });
+
 
 </script>
 </html>
