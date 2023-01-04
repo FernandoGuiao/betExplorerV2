@@ -20,7 +20,7 @@
         <div class="col-4 mt-1 p-1 rounded-4 block">
             <div class="border rounded">
                 <img class="m-2 p-1" height="50px" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">  <br>
-                <label class="p-1 fw-bold">Minutoss </label> <br>
+                <label class="p-1 fw-bold">Minutos</label> <br>
             </div>
             <div style="display: flex">
                 <div class="me-2">
@@ -182,14 +182,17 @@
     } catch (error) {
         console.log("error:",error)
     }
-    let form = document.getElementById("form");
-    console.log(form);
-    var formData = new FormData(form);
-    console.log(Object.fromEntries(formData));
 
     document.getElementById("submitButton").addEventListener("click", function(event){
         event.preventDefault()
+
+        let form = document.getElementById("form");
+        console.log(form);
+
+        let formData = new FormData(form);
+        console.log(Object.fromEntries(formData));
         console.log(event);
+        console.log(Object.fromEntries(formData));
         fetch('api/new-config', {
             method: 'POST',
             headers: {
