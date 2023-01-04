@@ -45,19 +45,19 @@ class VerifyData extends Command
 
             $configs = DB::select( DB::raw("SELECT A.* FROM user_configs A
                 WHERE (min_time is null OR min_time <= '$row->time') AND
-            k    (max_time is null OR max_time >= '$row->time') AND
+                (max_time is null OR max_time >= '$row->time') AND
                 (min_sum_goals is null OR min_sum_goals <= '$sum_goals') AND
                 (max_sum_goals is null OR max_sum_goals >= '$sum_goals') AND
                 (min_diff_goals is null OR min_diff_goals <= '$diff_goals') AND
                 (max_diff_goals is null OR max_diff_goals >= '$diff_goals') AND
                 (min_sum_shoots is null OR min_sum_shoots <= '$sum_shoots') AND
                 (max_sum_shoots is null OR max_sum_shoots >= '$sum_shoots') AND
-            k    (min_sum_shoots_on_target is null OR min_sum_shoots_on_target <= '$sum_shoots_on_target') AND
-            k    (max_sum_shoots_on_target is null OR max_sum_shoots_on_target >= '$sum_shoots_on_target') AND
-            k    (min_sum_corners is null OR min_sum_corners <= '$sum_corners') AND
-            k    (max_sum_corners is null OR max_sum_corners >= '$sum_corners') AND
-            k    (min_sum_red is null OR min_sum_red <= '$sum_red') AND
-            k    (max_sum_red is null OR max_sum_red >= '$sum_red') AND A.status = 1
+                (min_sum_shoots_on_target is null OR min_sum_shoots_on_target <= '$sum_shoots_on_target') AND
+                (max_sum_shoots_on_target is null OR max_sum_shoots_on_target >= '$sum_shoots_on_target') AND
+                (min_sum_corners is null OR min_sum_corners <= '$sum_corners') AND
+                (max_sum_corners is null OR max_sum_corners >= '$sum_corners') AND
+                (min_sum_red is null OR min_sum_red <= '$sum_red') AND
+                (max_sum_red is null OR max_sum_red >= '$sum_red') AND A.status = 1
             "));
 
             foreach($configs as $config){
