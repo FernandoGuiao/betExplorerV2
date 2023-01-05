@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<body lang="en">
 <head>
     <meta charset="UTF-8">
     <title>New Config</title>
@@ -45,11 +44,13 @@
                 <div style="display: flex">
                     <div class="me-2">
                         <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_shoots" name="min_sum_shoots"/>
+                        <input type="number" class="form-control text_color bg_color" id="min_sum_shoots"
+                               name="min_sum_shoots"/>
                     </div>
                     <div>
                         <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_shoots" name="max_sum_shoots"/>
+                        <input type="number" class="form-control text_color bg_color" id="max_sum_shoots"
+                               name="max_sum_shoots"/>
                     </div>
                 </div>
             </div>
@@ -62,11 +63,13 @@
                 <div style="display: flex">
                     <div class="me-2">
                         <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_goals" name="min_sum_goals"/>
+                        <input type="number" class="form-control text_color bg_color" id="min_sum_goals"
+                               name="min_sum_goals"/>
                     </div>
                     <div>
                         <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_goals" name="max_sum_goals"/>
+                        <input type="number" class="form-control text_color bg_color" id="max_sum_goals"
+                               name="max_sum_goals"/>
                     </div>
                 </div>
             </div>
@@ -103,11 +106,13 @@
                 <div style="display: flex">
                     <div class="me-2">
                         <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_red" name="min_sum_red"/>
+                        <input type="number" class="form-control text_color bg_color" id="min_sum_red"
+                               name="min_sum_red"/>
                     </div>
                     <div>
                         <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_red" name="max_sum_red"/>
+                        <input type="number" class="form-control text_color bg_color" id="max_sum_red"
+                               name="max_sum_red"/>
                     </div>
                 </div>
             </div>
@@ -120,11 +125,13 @@
                 <div style="display: flex">
                     <div class="me-2">
                         <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_corners" name="min_sum_corners"/>
+                        <input type="number" class="form-control text_color bg_color" id="min_sum_corners"
+                               name="min_sum_corners"/>
                     </div>
                     <div>
                         <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_corners" name="max_sum_corners"/>
+                        <input type="number" class="form-control text_color bg_color" id="max_sum_corners"
+                               name="max_sum_corners"/>
                     </div>
                 </div>
             </div>
@@ -143,11 +150,13 @@
                 <div style="display: flex">
                     <div class="me-2">
                         <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_diff_goals" name="min_diff_goals"/>
+                        <input type="number" class="form-control text_color bg_color" id="min_diff_goals"
+                               name="min_diff_goals"/>
                     </div>
                     <div>
                         <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_diff_goals" name="max_diff_goals"/>
+                        <input type="number" class="form-control text_color bg_color" id="max_diff_goals"
+                               name="max_diff_goals"/>
                     </div>
                 </div>
             </div>
@@ -155,7 +164,8 @@
             <div class="col-8 mt-1 p-1 rounded-4 block">
                 <div class="rounded bg_color">
                     <img class="m-2 p-1" height="50px" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color text_color">Nome da configuração </label> <br>
+                    <label style="font-size: 12px" class="p-1 fw-bold text_color text_color">Nome da
+                        configuração </label> <br>
                 </div>
                 <div>
                     <label style="font-size: 10px" class="mb-1 text_color">Nome</label> <br>
@@ -201,7 +211,7 @@
         }
 
         let text_color = document.getElementsByClassName("text_color")
-        for (let i = 0; i < text_color.length -1 ; i++) {
+        for (let i = 0; i < text_color.length - 1; i++) {
             text_color[i].style.color = themeParams.text_color;
         }
 
