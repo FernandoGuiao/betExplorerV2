@@ -164,12 +164,12 @@
             <div class="col-8 mt-1 p-1 rounded-4 block">
                 <div class="rounded bg_color">
                     <img class="m-2 p-1" height="50px" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color text_color">Nome da
+                    <label style="font-size: 12px" class="p-1 fw-bold text_color">Nome da
                         configuração </label> <br>
                 </div>
                 <div>
                     <label style="font-size: 10px" class="mb-1 text_color">Nome</label> <br>
-                    <input type="text" class="form-control bg_color text_color" id="name" name="name"/>
+                    <input type="text" class="form-control text_color bg_color" id="name" name="name"/>
                 </div>
             </div>
 
@@ -187,7 +187,7 @@
     try {
         let name = window.Telegram.WebApp.initDataUnsafe.user.first_name;
         let userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-        let mainButton = window.Telegram.WebApp.MainButton;
+        var mainButton = window.Telegram.WebApp.MainButton;
         var themeParams = window.Telegram.WebApp.themeParams;
         console.log(window.Telegram.WebApp.initDataUnsafe.user);
 
@@ -211,7 +211,7 @@
         }
 
         let text_color = document.getElementsByClassName("text_color")
-        for (let i = 0; i < text_color.length - 1; i++) {
+        for (let i = 0; i < text_color.length; i++) {
             text_color[i].style.color = themeParams.text_color;
         }
 
