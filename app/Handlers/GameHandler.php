@@ -23,11 +23,21 @@ class GameHandler
                 $query->where('id', $param);
             })->latest()->first();
 
+            $options = [
+                'parse_mode' => ParseMode::HTML,
+            ];
+
+            $options['reply_markup'] = [
+                'inline_keyboard' => [
+                    [
+                        ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $param],
+                    ],
+                ],
+            ];
+
             $bot->sendMessage(
                 VerifyData::makeMessage($latestGameDetail),
-                [
-                    'parse_mode' => ParseMode::HTML,
-                ]
+                $options
             );
 
         } catch (\Exception $e) {
