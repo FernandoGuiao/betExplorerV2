@@ -59,7 +59,7 @@ class ConfigHandler
 
         try {
 
-            $bot->sendMessage("✅ Nova configuração !",
+            $bot->sendMessage(" Nova configuração !",
                 [
                     'parse_mode' => ParseMode::HTML,
                     'reply_markup' => [
@@ -69,7 +69,7 @@ class ConfigHandler
                                     'text' => 'Fazer Nova Config',
                                     'web_app' => [
                                         'url' => url('/') . '/new-config',
-//                                        'url' => 'https://qab7qaxr3v.sharedwithexpose.com' . '/new-config',
+//                                        'url' => 'https://kg2fzmk9g2.sharedwithexpose.com' . '/new-config',
 
                                     ]
                                 ]
@@ -80,7 +80,7 @@ class ConfigHandler
             );
 
         } catch (Exception $e) {
-            $bot->sendMessage("❌ Erro");
+            $bot->sendMessage("❌ Erro ao enviar link para fazer nova configuração.");
             Log::error($e->getMessage(), $e->getTrace());
         }
     }
@@ -89,7 +89,18 @@ class ConfigHandler
     {
         UserConfig::where('user_id', $bot->user()->id)->delete();
 
-        $bot->sendMessage("❎ Configurações apagadas!");
+        $bot->sendMessage("❎ Todas as configurações foram apagadas!");
+    }
+
+    public function delete(Nutgram $bot, $param): void
+    {
+        try {
+            UserConfig::where('id', $param)->delete();
+            $bot->sendMessage("❎ Configuração apagada!");
+        } catch (Exception $e) {
+            $bot->sendMessage("❌ Erro ao apagar a configuração!");
+        }
+
     }
 
     public function show(Nutgram $bot): void
@@ -107,7 +118,17 @@ class ConfigHandler
                 "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
                 "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
                 [
-                    'parse_mode' => ParseMode::HTML
+                    'parse_mode' => ParseMode::HTML,
+                    'reply_markup' => [
+                        'inline_keyboard' => [
+                            [
+                                [
+                                    'text' => '⛔ Remover',
+                                    'callback_data' => 'deleteConfig ' . $config->id
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
             );
         }
@@ -115,6 +136,8 @@ class ConfigHandler
         if (count($configs) == 0) {
             $bot->sendMessage("❌ Você não possui configurações!");
         }
+
+        $this->newWeb($bot);
     }
 
     public function help(Nutgram $bot): void

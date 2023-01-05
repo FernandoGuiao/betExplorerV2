@@ -32,27 +32,25 @@ class TelegramController
             $bot->sendMessage('Utilize o menu de comandos para saber como utilizar o bot');
         });
 
-        $bot->onCommand('newConfig', [ConfigHandler::class, 'help']);
+        $bot->onCommand('newConfig {param}', [ConfigHandler::class, 'new']);
 
-        $bot->onCommand('newConfig {param}', [ConfigHandler::class, 'new'])
-            ->description('Cria nova configuração de alerta');
+        $bot->onCommand('paramTest {param}', [ConfigHandler::class, 'paramTest']);
 
-        $bot->onCommand('paramTest {param}', [ConfigHandler::class, 'paramTest'])
-            ->description('Cria nova configuração de alerta');
-
-        $bot->onCommand('newWebConfig', [ConfigHandler::class, 'newWeb'])
-            ->description('Cria nova configuração de alerta pela web');
+        $bot->onCommand('newWebConfig', [ConfigHandler::class, 'newWeb']);
 
         $bot->onCommand('clearConfig', [ConfigHandler::class, 'clear'])
-            ->description('Limpa todas as configurações de alerta');
+            ->description('Remove TODOS os alertas');
 
-        $bot->onCommand('showConfigs', [ConfigHandler::class, 'show'])
-            ->description('Mostra todas as configurações de alerta');
+        $bot->onCommand('configs', [ConfigHandler::class, 'show'])
+            ->description('Gerenciar alertas');
 
-        $bot->onCommand('help', [ConfigHandler::class, 'help'])
-            ->description('Mostra ajuda sobre configurações de alerta');
+
+        $bot->onCommand('help', [ConfigHandler::class, 'help']);
+
+        $bot->onCallbackQueryData('deleteConfig {param}', [ConfigHandler::class, 'delete']);
 
         $bot->onCallbackQueryData('gameStatusNow {param}', [GameHandler::class, 'gameStatusNow']);
+
         $bot->registerMyCommands();
 
         $bot->run();
