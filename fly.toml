@@ -12,8 +12,8 @@ processes = []
 
 [env]
   APP_ENV = "production"
-  LOG_CHANNEL = "stderr"
-  LOG_LEVEL = "info"
+  LOG_CHANNEL = "stack"
+  LOG_LEVEL = "debug"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   APP_KEY="base64:wR7tLLYFMMqVR6JvmiELrN8cHubk1+KY7VZXVK7gt3s="
   DB_CONNECTION = "mysql"
