@@ -5,181 +5,162 @@
     <title>New Config</title>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>    {!! include ('css/newConfig.css') !!}</style>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="{{ asset('css/newConfig.css') }}">
 </head>
 <body class="secondary_bg_color">
-<div class="container-sm text-center ">
-    <form id="form">
-        @csrf
-        <div class="row text-lg text-center font-large  m-2 p-2">
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon"> <br>
-                    <label class="p-1 fw-bold text_color">Minutos</label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_time" name="min_time"/>
+    <div class="body_container secondary_bg_color">
+        <form id="form">
+            @csrf
+            <div class="row">
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Minutos</div>
                     </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_time" name="max_time"/>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_time" name="min_time"
+                                   placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_time" name="max_time"
+                                   placeholder="max"/>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon"> <br>
-                    <label class="p-1 fw-bold text_color">Chutes </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_shoots"
-                               name="min_sum_shoots"/>
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Chutes</div>
                     </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_shoots"
-                               name="max_sum_shoots"/>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_sum_shoots"
+                                   name="min_sum_shoots" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_sum_shoots"
+                                   name="max_sum_shoots" placeholder="max"/>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon"> <br>
-                    <label class="p-1 fw-bold text_color">Gols </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_goals"
-                               name="min_sum_goals"/>
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Gols</div>
                     </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_goals"
-                               name="max_sum_goals"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{--  segunda linha  --}}
-
-        <div class="row text-lg text-center font-large  m-2 p-2">
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
-                    <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color">Chute a Gol </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_shoots_on_target"
-                               name="min_sum_shoots_on_target"/>
-                    </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_shoots_on_target"
-                               name="max_sum_shoots_on_target"/>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_sum_goals"
+                                   name="min_sum_goals" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_sum_goals"
+                                   name="max_sum_goals" placeholder="max"/>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color">C. Verm. </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_red"
-                               name="min_sum_red"/>
+            {{--  segunda linha  --}}
+            <div class="row">
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Chutes a Gol</div>
                     </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_red"
-                               name="max_sum_red"/>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_sum_shoots_on_target"
+                                   name="min_sum_shoots_on_target" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_sum_shoots_on_target"
+                                   name="max_sum_shoots_on_target" placeholder="max"/>
+                        </div>
                     </div>
                 </div>
+
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Cartões Vermelhos</div>
+                    </div>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_sum_red"
+                                   name="min_sum_red" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_sum_red"
+                                   name="max_sum_red" placeholder="max"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Total de Escanteios</div>
+                    </div>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_sum_corners"
+                                   name="min_sum_corners" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_sum_corners"
+                                   name="max_sum_corners" placeholder="max"/>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color">Escanteios </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_sum_corners"
-                               name="min_sum_corners"/>
+            {{--  terceira linha  --}}
+
+            <div class="row">
+
+                <div class="block_container">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Diferença de Gols</div>
                     </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_sum_corners"
-                               name="max_sum_corners"/>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="min_diff_goals"
+                                   name="min_diff_goals" placeholder="min"/>
+                        </div>
+                        <div class="input_group">
+                            <input type="number" class="text_color bg_color" id="max_diff_goals"
+                                   name="max_diff_goals" placeholder="max"/>
+                        </div>
                     </div>
                 </div>
+
+                <div class="block_container_double">
+                    <div class="img_container bg_color">
+                        <img class="img_icon" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon">
+                        <div class="img_text text_color">Nome da configuração</div>
+                        <br>
+                    </div>
+                    <div class="inputs_container">
+                        <div class="input_group">
+                            <input type="text" class="text_color bg_color" id="name" name="name" placeholder="..."/>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+            <input type="number" id="status" name="status" value=1 hidden/>
+            <input type="number" id="user_id" name="user_id" hidden/>
+        </form>
 
-        </div>
-
-        {{--  terceira linha  --}}
-
-        <div class="row text-lg text-center font-large  m-2 p-2">
-
-            <div class="col-4 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color">Dif. Gols </label> <br>
-                </div>
-                <div style="display: flex">
-                    <div class="me-2">
-                        <label style="font-size: 10px" class="mb-1 text_color">min</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="min_diff_goals"
-                               name="min_diff_goals"/>
-                    </div>
-                    <div>
-                        <label style="font-size: 10px" class="mb-1 text_color">max</label> <br>
-                        <input type="number" class="form-control text_color bg_color" id="max_diff_goals"
-                               name="max_diff_goals"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-8 mt-1 p-1 rounded-4 block">
-                <div class="rounded bg_color">
-                    <img class="m-2 p-1" height="50px" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon"> <br>
-                    <label style="font-size: 12px" class="p-1 fw-bold text_color">Nome da
-                        configuração </label> <br>
-                </div>
-                <div>
-                    <label style="font-size: 10px" class="mb-1 text_color">Nome</label> <br>
-                    <input type="text" class="form-control text_color bg_color" id="name" name="name"/>
-                </div>
-            </div>
-
-
-        </div>
-        <input type="number" id="status" name="status" value=1 hidden/>
-        <input type="number" id="user_id" name="user_id" hidden/>
-    </form>
-
-</div>
+    </div>
 </body>
 
 <script>
@@ -199,20 +180,20 @@
 
         let bg_color = document.getElementsByClassName("bg_color")
         for (let i = 0; i < bg_color.length; i++) {
-            bg_color[i].style.backgroundColor = themeParams.bg_color;
+            bg_color[i].style.backgroundColor = themeParams.secondary_bg_color;
             bg_color[i].style.border = 0;
-            bg_color[i].style.boxShadow = "1px 1px 2px " + themeParams.hint_color;
+            // bg_color[i].style.boxShadow = "1px 1px 2px " + themeParams.hint_color;
         }
 
         let secondary_bg_color = document.getElementsByClassName("secondary_bg_color")
         for (let i = 0; i < secondary_bg_color.length; i++) {
-            console.log(secondary_bg_color[i])
-            secondary_bg_color[i].style.backgroundColor = themeParams.secondary_bg_color;
+            secondary_bg_color[i].style.backgroundColor = themeParams.bg_color;
         }
 
         let text_color = document.getElementsByClassName("text_color")
         for (let i = 0; i < text_color.length; i++) {
             text_color[i].style.color = themeParams.text_color;
+
         }
 
     } catch (error) {
