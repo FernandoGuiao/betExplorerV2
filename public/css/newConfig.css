@@ -5,20 +5,19 @@
 .row {
     display: flex;
     font-family: sans-serif;
-    max-width: 360px;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2vw;
 }
 
 .img_container {
-    margin: 0.5rem 0.5rem 0.2rem 0.5rem;
-    padding: 0.5rem;
+    margin: 2vw 2vw 1vw 2vw;
+    padding: 2vw;
     text-align: center;
     border-radius: 0.5rem;
 }
 
 .inputs_container {
-    margin: 0.5rem 0.2rem 0.2rem 0.5rem;
+    margin: 2vw 2vw 1vw 2vw;
     text-align: center;
 }
 
@@ -28,7 +27,7 @@
 
 .img_icon {
     width: 100%;
-    max-width: 84px;
+    max-height: 22vw;
 }
 
 .block_container {
@@ -36,6 +35,7 @@
 }
 .block_container_double {
     max-width: 66%;
+    max-height: inherit;
 }
 
 input {
@@ -43,9 +43,9 @@ input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
-    margin: 0.5rem;
-    min-height: 1.5rem;
-    font-size: x-large;
+    margin: 2vw;
+    min-height: 1.5vw;
+    font-size: 5vw;
 }
 
 ::placeholder {
@@ -54,7 +54,7 @@ input {
 
 .img_text {
     text-align: center;
-    font-size: 1rem;
+    font-size: 4vw;
     font-weight: bold;
     margin-top: 1rem;
     font-variant: all-small-caps;

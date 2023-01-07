@@ -5,8 +5,8 @@
     <title>New Config</title>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>    {!! include ('css/newConfig.css') !!}</style>
 
-    <link rel="stylesheet" href="{{ asset('css/newConfig.css') }}">
 </head>
 <body class="secondary_bg_color">
     <div class="body_container secondary_bg_color">
@@ -70,7 +70,7 @@
                 <div class="block_container">
                     <div class="img_container bg_color">
                         <img class="img_icon" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
-                        <div class="img_text text_color">Chute a Gol</div>
+                        <div class="img_text text_color">Chutes a Gol</div>
                     </div>
                     <div class="inputs_container">
                         <div class="input_group">
@@ -180,22 +180,19 @@
 
         let bg_color = document.getElementsByClassName("bg_color")
         for (let i = 0; i < bg_color.length; i++) {
-            bg_color[i].style.backgroundColor = themeParams.bg_color;
+            bg_color[i].style.backgroundColor = themeParams.secondary_bg_color;
             bg_color[i].style.border = 0;
             // bg_color[i].style.boxShadow = "1px 1px 2px " + themeParams.hint_color;
         }
 
         let secondary_bg_color = document.getElementsByClassName("secondary_bg_color")
         for (let i = 0; i < secondary_bg_color.length; i++) {
-            console.log(secondary_bg_color[i])
-            secondary_bg_color[i].style.backgroundColor = themeParams.secondary_bg_color;
+            secondary_bg_color[i].style.backgroundColor = themeParams.bg_color;
         }
 
         let text_color = document.getElementsByClassName("text_color")
         for (let i = 0; i < text_color.length; i++) {
             text_color[i].style.color = themeParams.text_color;
-            console.log(text_color[i])
-            // text_color[i].placeholder.color = themeParams.hint_color;
 
         }
 
