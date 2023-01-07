@@ -15,7 +15,9 @@
             <div class="row">
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Minutos</div>
                     </div>
                     <div class="inputs_container">
@@ -32,7 +34,9 @@
 
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Chutes</div>
                     </div>
                     <div class="inputs_container">
@@ -49,7 +53,9 @@
 
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Gols</div>
                     </div>
                     <div class="inputs_container">
@@ -69,7 +75,9 @@
             <div class="row">
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Chutes a Gol</div>
                     </div>
                     <div class="inputs_container">
@@ -86,7 +94,9 @@
 
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Cartões Vermelhos</div>
                     </div>
                     <div class="inputs_container">
@@ -103,7 +113,9 @@
 
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Total de Escanteios</div>
                     </div>
                     <div class="inputs_container">
@@ -126,7 +138,9 @@
 
                 <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon">
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon">
+                        </div>
                         <div class="img_text text_color">Diferença de Gols</div>
                     </div>
                     <div class="inputs_container">
@@ -141,15 +155,16 @@
                     </div>
                 </div>
 
-                <div class="block_container_double">
+                <div class="block_container">
                     <div class="img_container bg_color">
-                        <img class="img_icon" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon">
-                        <div class="img_text text_color">Nome da configuração</div>
-                        <br>
+                        <div class="img_bg">
+                            <img class="img_icon" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon">
+                        </div>
+                        <div class="img_text text_color">Nome da config</div>
                     </div>
                     <div class="inputs_container">
                         <div class="input_group">
-                            <input type="text" class="text_color bg_color" id="name" name="name" placeholder="..."/>
+                            <input type="text" class="text_color bg_color text_double" id="name" name="name" placeholder="..."/>
                         </div>
                     </div>
                 </div>
