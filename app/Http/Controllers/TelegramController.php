@@ -51,6 +51,8 @@ class TelegramController
 
         $bot->onCallbackQueryData('gameStatusNow {param}', [GameHandler::class, 'gameStatusNow']);
 
+        // $bot->onCallbackQueryData('gameHistory {param}', [GameHandler::class, 'gameHistory']);
+
         $bot->registerMyCommands();
 
         $bot->run();

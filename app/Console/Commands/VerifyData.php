@@ -36,28 +36,43 @@ class VerifyData extends Command
         $game_details = GameDetail::where(['status'=>0])->get();
         foreach($game_details as $row){
             $sum_shoots = $row->home_on_target+$row->home_off_target+$row->guest_on_target+$row->guest_off_target;
+            $sh_sum_shoots = ($row->home_on_target+$row->home_off_target+$row->guest_on_target+$row->guest_off_target)-($row->first_half_home_on_target+$row->first_half_home_off_target+$row->first_half_guest_on_target+$row->first_half_guest_off_target);
             $sum_shoots_on_target = $row->home_on_target+$row->guest_on_target;
+            $sh_sum_shoots_on_target = ($row->home_on_target+$row->guest_on_target)-($row->first_half_home_on_target+$row->first_half_guest_on_target);
             $sum_corners = $row->home_corner+$row->guest_corner;
+            $sh_sum_corners = ($row->home_corner+$row->guest_corner)-($row->first_half_home_corner+$row->first_half_guest_corner);
             $sum_red = $row->home_red+$row->guest_red;
+            $sh_sum_red = ($row->home_red+$row->guest_red)-($row->first_half_home_red+$row->first_half_guest_red);
             $sum_goals = $row->home_goal+$row->guest_goal;
+            $sh_sum_goals = ($row->home_goal+$row->guest_goal)-($row->first_half_home_goal+$row->first_half_guest_goal);
             $diff_goals = abs($row->home_goal-$row->guest_goal);
-
-
+            
             $configs = DB::select( DB::raw("SELECT A.* FROM user_configs A
                 WHERE (min_time is null OR min_time <= '$row->time') AND
                 (max_time is null OR max_time >= '$row->time') AND
                 (min_sum_goals is null OR min_sum_goals <= '$sum_goals') AND
+                (second_half_min_sum_goals is null OR second_half_min_sum_goals <= '$sh_sum_goals') AND
                 (max_sum_goals is null OR max_sum_goals >= '$sum_goals') AND
+                (second_half_max_sum_goals is null OR second_half_max_sum_goals >= '$sh_sum_goals') AND
                 (min_diff_goals is null OR min_diff_goals <= '$diff_goals') AND
                 (max_diff_goals is null OR max_diff_goals >= '$diff_goals') AND
                 (min_sum_shoots is null OR min_sum_shoots <= '$sum_shoots') AND
+                (second_half_min_sum_shoots is null OR second_half_min_sum_shoots <= '$sh_sum_shoots') AND
                 (max_sum_shoots is null OR max_sum_shoots >= '$sum_shoots') AND
+                (second_half_max_sum_shoots is null OR second_half_max_sum_shoots >= '$sh_sum_shoots') AND
                 (min_sum_shoots_on_target is null OR min_sum_shoots_on_target <= '$sum_shoots_on_target') AND
+                (second_half_min_sum_shoots_on_target is null OR second_half_min_sum_shoots_on_target <= '$sh_sum_shoots_on_target') AND
                 (max_sum_shoots_on_target is null OR max_sum_shoots_on_target >= '$sum_shoots_on_target') AND
+                (second_half_max_sum_shoots_on_target is null OR second_half_max_sum_shoots_on_target >= '$sh_sum_shoots_on_target') AND
                 (min_sum_corners is null OR min_sum_corners <= '$sum_corners') AND
+                (second_half_min_sum_corners is null OR second_half_min_sum_corners <= '$sh_sum_corners') AND
                 (max_sum_corners is null OR max_sum_corners >= '$sum_corners') AND
+                (second_half_max_sum_corners is null OR second_half_max_sum_corners >= '$sh_sum_corners') AND
                 (min_sum_red is null OR min_sum_red <= '$sum_red') AND
-                (max_sum_red is null OR max_sum_red >= '$sum_red') AND A.status = 1
+                (second_half_min_sum_red is null OR second_half_min_sum_red <= '$sh_sum_red') AND
+                (max_sum_red is null OR max_sum_red >= '$sum_red') AND 
+                (second_half_max_sum_red is null OR second_half_max_sum_red >= '$sh_sum_red') AND 
+                A.status = 1
             "));
 
             foreach($configs as $config){
@@ -104,8 +119,26 @@ class VerifyData extends Command
 
         "🔸   Escanteios: " . $gameDetails->home_corner . " <b>x</b> " . $gameDetails->guest_corner . PHP_EOL .
         "🔸   Chute a gol: " . $gameDetails->home_on_target . " <b>x</b> " . $gameDetails->guest_on_target . PHP_EOL .
-        "🔸   Chute para fora: " . $gameDetails->home_off_target . " <b>x</b> " . $gameDetails->guest_off_target;
+        "🔸   Chute para fora: " . $gameDetails->home_off_target . " <b>x</b> " . $gameDetails->guest_off_target . PHP_EOL .
         "🔸   Cartões Vermelhos: " . $gameDetails->home_red . " <b>x</b> " . $gameDetails->guest_red;
+
+        if($gameDetails->game->half == 2){
+            $message = $message .
+            PHP_EOL . PHP_EOL .
+            "🔸   -- Primeiro Tempo --" . PHP_EOL .
+            "🔸   Escanteios: " . $gameDetails->first_half_home_corner . " <b>x</b> " . $gameDetails->first_half_guest_corner . PHP_EOL .
+            "🔸   Chute a gol: " . $gameDetails->first_half_home_on_target . " <b>x</b> " . $gameDetails->first_half_guest_on_target . PHP_EOL .
+            "🔸   Chute para fora: " . $gameDetails->first_half_home_off_target . " <b>x</b> " . $gameDetails->first_half_guest_off_target . PHP_EOL .
+            "🔸   Cartões Vermelhos: " . $gameDetails->first_half_home_red . " <b>x</b> " . $gameDetails->first_half_guest_red;
+            
+            $message = $message .
+            PHP_EOL . PHP_EOL .
+            "🔸   -- Segundo Tempo --" . PHP_EOL .
+            "🔸   Escanteios: " . ($gameDetails->home_corner-$gameDetails->first_half_home_corner) . " <b>x</b> " . ($gameDetails->guest_corner-$gameDetails->first_half_guest_corner) . PHP_EOL .
+            "🔸   Chute a gol: " . ($gameDetails->home_on_target-$gameDetails->first_half_home_on_target) . " <b>x</b> " . ($gameDetails->guest_on_target-$gameDetails->first_half_guest_on_target) . PHP_EOL .
+            "🔸   Chute para fora: " . ($gameDetails->home_off_target-$gameDetails->first_half_home_off_target) . " <b>x</b> " . ($gameDetails->guest_off_target-$gameDetails->first_half_guest_off_target) . PHP_EOL .
+            "🔸   Cartões Vermelhos: " . ($gameDetails->home_red-$gameDetails->first_half_home_red) . " <b>x</b> " . ($gameDetails->home_red-$gameDetails->first_half_home_red);
+        }
 
         return $message;
     }

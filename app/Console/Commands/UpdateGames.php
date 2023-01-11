@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Game;
+use App\Models\GameDetail;
 use App\Models\Health;
 use App\Models\TelegramQueue;
 use App\Models\User;
@@ -178,10 +179,24 @@ class UpdateGames extends Command
                     $arrDetails['first_half_home_yellow'] = $row->rd->hy ?? null;
                     $arrDetails['first_half_guest_yellow'] = $row->rd->gy ?? null;
                 }else{
+
+                    $lastestDetail = GameDetail::where(['game_id'=>$game->id])
+                    ->orderByRaw('id DESC')
+                    ->first();
+
                     $arrDetails['first_half_home_goal'] = $row->rh->hg ?? null;
                     $arrDetails['first_half_guest_goal'] = $row->rh->gg ?? null;
                     $arrDetails['first_half_home_corner'] = $row->rh->hc ?? null;
                     $arrDetails['first_half_guest_corner'] = $row->rh->gc ?? null;
+
+                    $arrDetails['first_half_home_on_target'] = $lastestDetail->first_half_home_on_target ?? null;
+                    $arrDetails['first_half_guest_on_target'] = $row->first_half_guest_on_target ?? null;
+                    $arrDetails['first_half_home_off_target'] = $row->first_half_home_off_target ?? null;
+                    $arrDetails['first_half_guest_off_target'] = $row->first_half_guest_off_target ?? null;
+                    $arrDetails['first_half_home_red'] = $row->first_half_home_red ?? null;
+                    $arrDetails['first_half_guest_red'] = $row->first_half_guest_red ?? null;
+                    $arrDetails['first_half_home_yellow'] = $row->first_half_home_yellow ?? null;
+                    $arrDetails['first_half_guest_yellow'] = $row->first_half_guest_yellow ?? null;
                 }
 
                 $game->gameDetails()->create($arrDetails);
