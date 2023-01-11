@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\TelegramQueue;
+use App\Models\GameDetail;
 
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
@@ -44,8 +45,9 @@ class SendTelegram extends Command
 
                 if ($row->game_id) {
 
-                    $latestGameDetail = GameDetail::with('game')->whereHas('game', function ($query) use ($param) {
-                        $query->where('id', $row->game_id);
+                    $gameId = $row->game_id;
+                    $latestGameDetail = GameDetail::with('game')->whereHas('game', function ($query) use ($gameId) {
+                        $query->where('id', $gameId);
                     })->latest()->first();
 
                     $options['reply_markup'] = [
