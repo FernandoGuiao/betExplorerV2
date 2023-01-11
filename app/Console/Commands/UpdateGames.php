@@ -103,13 +103,17 @@ class UpdateGames extends Command
                             if(isset($home_stats['games']) && count($home_stats['games']) > 4){
                                 unset($home_stats['games'][array_key_first($home_stats['games'])]);
                             }
-                            $home_stats['games'][$game->id]['home'] = $game->home;
-                            $home_stats['games'][$game->id]['guest'] = $game->guest;
-                            $home_stats['games'][$game->id]['date'] = $game->created_at;
-                            $home_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
-                            $home_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
-                            $home_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
-                            $home_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
+                            $home_stats['games'][$game->id]['h'] = $game->home; //home
+                            $home_stats['games'][$game->id]['g'] = $game->guest; //guest
+                            $home_stats['games'][$game->id]['d'] = $game->created_at; //date
+                            $home_stats['games'][$game->id]['hg'] = $row->rd->hg; //home goals
+                            $home_stats['games'][$game->id]['gg'] = $row->rd->gg; //guest goals
+                            $home_stats['games'][$game->id]['hhg'] = $row->rh->hg; //home half goals
+                            $home_stats['games'][$game->id]['ghg'] = $row->rh->gg; //guest half goals
+                            $home_stats['games'][$game->id]['hc'] = $row->rd->hc; //home corners
+                            $home_stats['games'][$game->id]['gc'] = $row->rd->gc; //guest corners
+                            $home_stats['games'][$game->id]['hhc'] = $row->rh->hc; //home half corners
+                            $home_stats['games'][$game->id]['ghc'] = $row->rh->gc; //guest home corners
                             $home->stats = $home_stats;
                             $home->save();
                         }
@@ -122,13 +126,17 @@ class UpdateGames extends Command
                             if(isset($guest_stats['games']) && count($guest_stats['games']) > 4){
                                 unset($guest_stats['games'][array_key_first($guest_stats['games'])]);
                             }
-                            $guest_stats['games'][$game->id]['home'] = $game->home;
-                            $guest_stats['games'][$game->id]['guest'] = $game->guest;
-                            $guest_stats['games'][$game->id]['date'] = $game->created_at;
-                            $guest_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
-                            $guest_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
-                            $guest_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
-                            $guest_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
+                            $guest_stats['games'][$game->id]['h'] = $game->home;
+                            $guest_stats['games'][$game->id]['g'] = $game->guest;
+                            $guest_stats['games'][$game->id]['d'] = $game->created_at;
+                            $guest_stats['games'][$game->id]['hg'] = $row->rd->hg;
+                            $guest_stats['games'][$game->id]['gg'] = $row->rd->gg;
+                            $guest_stats['games'][$game->id]['hhg'] = $row->rh->hg;
+                            $guest_stats['games'][$game->id]['ghg'] = $row->rh->gg;
+                            $guest_stats['games'][$game->id]['hc'] = $row->rd->hc;
+                            $guest_stats['games'][$game->id]['gc'] = $row->rd->gc;
+                            $guest_stats['games'][$game->id]['hhc'] = $row->rh->hc;
+                            $guest_stats['games'][$game->id]['ghc'] = $row->rh->gc;
                             $guest->stats = $guest_stats;
                             $guest->save();
                         }
