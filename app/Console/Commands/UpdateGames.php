@@ -190,13 +190,13 @@ class UpdateGames extends Command
                     $arrDetails['first_half_guest_corner'] = $row->rh->gc ?? null;
 
                     $arrDetails['first_half_home_on_target'] = $lastestDetail->first_half_home_on_target ?? null;
-                    $arrDetails['first_half_guest_on_target'] = $row->first_half_guest_on_target ?? null;
-                    $arrDetails['first_half_home_off_target'] = $row->first_half_home_off_target ?? null;
-                    $arrDetails['first_half_guest_off_target'] = $row->first_half_guest_off_target ?? null;
-                    $arrDetails['first_half_home_red'] = $row->first_half_home_red ?? null;
-                    $arrDetails['first_half_guest_red'] = $row->first_half_guest_red ?? null;
-                    $arrDetails['first_half_home_yellow'] = $row->first_half_home_yellow ?? null;
-                    $arrDetails['first_half_guest_yellow'] = $row->first_half_guest_yellow ?? null;
+                    $arrDetails['first_half_guest_on_target'] = $lastestDetail->first_half_guest_on_target ?? null;
+                    $arrDetails['first_half_home_off_target'] = $lastestDetail->first_half_home_off_target ?? null;
+                    $arrDetails['first_half_guest_off_target'] = $lastestDetail->first_half_guest_off_target ?? null;
+                    $arrDetails['first_half_home_red'] = $lastestDetail->first_half_home_red ?? null;
+                    $arrDetails['first_half_guest_red'] = $lastestDetail->first_half_guest_red ?? null;
+                    $arrDetails['first_half_home_yellow'] = $lastestDetail->first_half_home_yellow ?? null;
+                    $arrDetails['first_half_guest_yellow'] = $lastestDetail->first_half_guest_yellow ?? null;
                 }
 
                 $game->gameDetails()->create($arrDetails);
