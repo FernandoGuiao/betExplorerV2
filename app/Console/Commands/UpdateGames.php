@@ -147,8 +147,8 @@ class UpdateGames extends Command
 
                     $game->update(['half' => 2]);
                 }
-
-                $game->gameDetails()->create([
+                
+                $arrDetails = [
                     'time' => $time,
                     'home_goal' => $row->rd->hg ?? null,
                     'guest_goal' => $row->rd->gg ?? null,
@@ -161,8 +161,30 @@ class UpdateGames extends Command
                     'home_red' => $row->rd->hr ?? null,
                     'guest_red' => $row->rd->gr ?? null,
                     'home_yellow' => $row->rd->hy ?? null,
-                    'guest_yellow' => $row->rd->gy ?? null,
-                ]);
+                    'guest_yellow' => $row->rd->gy ?? null
+                ];
+                
+                if(!isset($row->rh)){
+                    $arrDetails['first_half_home_goal'] = $row->rd->hg ?? null;
+                    $arrDetails['first_half_guest_goal'] = $row->rd->gg ?? null;
+                    $arrDetails['first_half_home_corner'] = $row->rd->hc ?? null;
+                    $arrDetails['first_half_guest_corner'] = $row->rd->gc ?? null;
+                    $arrDetails['first_half_home_on_target'] = $row->plus->hso ?? null;
+                    $arrDetails['first_half_guest_on_target'] = $row->plus->gso ?? null;
+                    $arrDetails['first_half_home_off_target'] = $row->plus->hsf ?? null;
+                    $arrDetails['first_half_guest_off_target'] = $row->plus->gsf ?? null;
+                    $arrDetails['first_half_home_red'] = $row->rd->hr ?? null;
+                    $arrDetails['first_half_guest_red'] = $row->rd->gr ?? null;
+                    $arrDetails['first_half_home_yellow'] = $row->rd->hy ?? null;
+                    $arrDetails['first_half_guest_yellow'] = $row->rd->gy ?? null;
+                }else{
+                    $arrDetails['first_half_home_goal'] = $row->rh->hg ?? null;
+                    $arrDetails['first_half_guest_goal'] = $row->rh->gg ?? null;
+                    $arrDetails['first_half_home_corner'] = $row->rh->hc ?? null;
+                    $arrDetails['first_half_guest_corner'] = $row->rh->gc ?? null;
+                }
+
+                $game->gameDetails()->create($arrDetails);
             }
         }
         $this->info('Games updated...' . date('Y-m-d H:i:s'));
