@@ -105,7 +105,7 @@ class UpdateGames extends Command
                             }
                             $home_stats['games'][$game->id]['h'] = $game->home; //home
                             $home_stats['games'][$game->id]['g'] = $game->guest; //guest
-                            $home_stats['games'][$game->id]['d'] = $game->created_at; //date
+                            $home_stats['games'][$game->id]['d'] = date('d/m/Y', strtotime($game->created_at)); //date
                             $home_stats['games'][$game->id]['hg'] = $row->rd->hg; //home goals
                             $home_stats['games'][$game->id]['gg'] = $row->rd->gg; //guest goals
                             $home_stats['games'][$game->id]['hhg'] = $row->rh->hg; //home half goals
@@ -128,7 +128,7 @@ class UpdateGames extends Command
                             }
                             $guest_stats['games'][$game->id]['h'] = $game->home;
                             $guest_stats['games'][$game->id]['g'] = $game->guest;
-                            $guest_stats['games'][$game->id]['d'] = $game->created_at;
+                            $guest_stats['games'][$game->id]['d'] = date('d/m/Y', strtotime($game->created_at)); //date
                             $guest_stats['games'][$game->id]['hg'] = $row->rd->hg;
                             $guest_stats['games'][$game->id]['gg'] = $row->rd->gg;
                             $guest_stats['games'][$game->id]['hhg'] = $row->rh->hg;
