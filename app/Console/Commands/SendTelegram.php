@@ -43,10 +43,15 @@ class SendTelegram extends Command
                 ];
 
                 if ($row->game_id) {
+
+                    $latestGameDetail = GameDetail::with('game')->whereHas('game', function ($query) use ($param) {
+                        $query->where('id', $row->game_id);
+                    })->latest()->first();
+
                     $options['reply_markup'] = [
                         'inline_keyboard' => [
                             [
-                                ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id .' '.$row->id],
+                                ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id .' '.$latestGameDetail->id],
                             ],
 //                            [
 //                                ['text' => 'Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id], // Colocar botão de ver últimos jogos dos times (time 1)
