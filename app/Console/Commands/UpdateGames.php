@@ -97,37 +97,41 @@ class UpdateGames extends Command
                     $time = 90;
 
                     $home = Team::find($game->home_id);
-                    $home_stats = json_decode($home->stats, true);
-                    if(!isset($home_stats['games'][$game->id])){
-                        if(isset($home_stats['games']) && count($home_stats['games']) > 4){
-                            unset($home_stats['games'][array_key_first($home_stats['games'])]);
+                    if($home){
+                        $home_stats = json_decode($home->stats, true);
+                        if(!isset($home_stats['games'][$game->id])){
+                            if(isset($home_stats['games']) && count($home_stats['games']) > 4){
+                                unset($home_stats['games'][array_key_first($home_stats['games'])]);
+                            }
+                            $home_stats['games'][$game->id]['home'] = $game->home;
+                            $home_stats['games'][$game->id]['guest'] = $game->guest;
+                            $home_stats['games'][$game->id]['date'] = $game->created_at;
+                            $home_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
+                            $home_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
+                            $home_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
+                            $home_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
+                            $home->stats = $home_stats;
+                            $home->save();
                         }
-                        $home_stats['games'][$game->id]['home'] = $game->home;
-                        $home_stats['games'][$game->id]['guest'] = $game->guest;
-                        $home_stats['games'][$game->id]['date'] = $game->created_at;
-                        $home_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
-                        $home_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
-                        $home_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
-                        $home_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
-                        $home->stats = $home_stats;
-                        $home->save();
                     }
 
                     $guest = Team::find($game->guest_id);
-                    $guest_stats = json_decode($guest->stats, true);
-                    if(!isset($guest_stats['games'][$game->id])){
-                        if(isset($guest_stats['games']) && count($guest_stats['games']) > 4){
-                            unset($guest_stats['games'][array_key_first($guest_stats['games'])]);
+                    if($guest){
+                        $guest_stats = json_decode($guest->stats, true);
+                        if(!isset($guest_stats['games'][$game->id])){
+                            if(isset($guest_stats['games']) && count($guest_stats['games']) > 4){
+                                unset($guest_stats['games'][array_key_first($guest_stats['games'])]);
+                            }
+                            $guest_stats['games'][$game->id]['home'] = $game->home;
+                            $guest_stats['games'][$game->id]['guest'] = $game->guest;
+                            $guest_stats['games'][$game->id]['date'] = $game->created_at;
+                            $guest_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
+                            $guest_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
+                            $guest_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
+                            $guest_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
+                            $guest->stats = $guest_stats;
+                            $guest->save();
                         }
-                        $guest_stats['games'][$game->id]['home'] = $game->home;
-                        $guest_stats['games'][$game->id]['guest'] = $game->guest;
-                        $guest_stats['games'][$game->id]['date'] = $game->created_at;
-                        $guest_stats['games'][$game->id]['home_goals'] = $row->rd->hg;
-                        $guest_stats['games'][$game->id]['guest_goals'] = $row->rd->gg;
-                        $guest_stats['games'][$game->id]['home_half_goals'] = $row->rh->hg;
-                        $guest_stats['games'][$game->id]['guest_half_goals'] = $row->rh->gg;
-                        $guest->stats = $guest_stats;
-                        $guest->save();
                     }
 
                 } elseif ($time == 'HT') {
