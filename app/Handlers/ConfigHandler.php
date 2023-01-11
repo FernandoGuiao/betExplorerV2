@@ -112,11 +112,16 @@ class ConfigHandler
                 "📝 <b>" . ($config->name ?? "X") . "</b>" . PHP_EOL . PHP_EOL .
                 "⏱ Tempo: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL .
                 "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
+                "🥅 (2º Tempo) Gols: " . ($config->second_half_min_sum_goals ?? "X") . " - " . ($config->second_half_max_sum_goals ?? "X") . PHP_EOL .
                 "🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
                 "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
+                "⚽ (2º Tempo) Chutes: " . ($config->second_half_min_sum_shoots ?? "X") . " - " . ($config->second_half_max_sum_shoots ?? "X") . PHP_EOL .
                 "⚽ Chutes no gol: " . ($config->min_sum_shoots_on_target ?? "X") . " - " . ($config->max_sum_shoots_on_target ?? "X") . PHP_EOL .
+                "⚽ (2º Tempo) Chutes no gol: " . ($config->second_half_min_sum_shoots_on_target ?? "X") . " - " . ($config->second_half_max_sum_shoots_on_target ?? "X") . PHP_EOL .
                 "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
-                "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X"),
+                "⛳ (2º Tempo) Escanteios: " . ($config->second_half_min_sum_corners ?? "X") . " - " . ($config->second_half_max_sum_corners ?? "X") . PHP_EOL .
+                "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X") . PHP_EOL .
+                "🔴 (2º Tempo) Cartões Vermelhos: " . ($config->second_half_min_sum_red ?? "X") . " - " . ($config->second_half_max_sum_red ?? "X"),
                 [
                     'parse_mode' => ParseMode::HTML,
                     'reply_markup' => [
