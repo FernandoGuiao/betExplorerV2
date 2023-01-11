@@ -49,7 +49,7 @@ class TelegramController
 
         $bot->onCallbackQueryData('deleteConfig {param}', [ConfigHandler::class, 'delete']);
 
-        $bot->onCallbackQueryData('gameStatusNow {param}', [GameHandler::class, 'gameStatusNow']);
+        $bot->onCallbackQueryData('gameStatusNow {param} {msg_id}', [GameHandler::class, 'gameStatusNow']);
 
         // $bot->onCallbackQueryData('gameHistory {param}', [GameHandler::class, 'gameHistory']);
 

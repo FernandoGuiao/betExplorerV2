@@ -105,7 +105,7 @@ class VerifyData extends Command
         return Command::SUCCESS;
     }
 
-    public static function makeMessage(mixed $gameDetails, mixed $userConfig = null) : string
+    public static function makeMessage(mixed $gameDetails, mixed $userConfig = null, $compareDetails = null) : string
     {
         $message = '';
         if($userConfig){
@@ -114,13 +114,13 @@ class VerifyData extends Command
         $message =  $message .
         "⏱   <b>" . $gameDetails->time . " </b>" . PHP_EOL .
         "🏆   <b><u>" . $gameDetails->game->league . "</u></b>" . PHP_EOL .
-        "👕   <b>" . $gameDetails->home_goal . "</b> - " . $gameDetails->game->home . PHP_EOL .
-        "👕   <b>" . $gameDetails->guest_goal . "</b> - " . $gameDetails->game->guest . PHP_EOL . PHP_EOL .
+        "👕   <b>" . $gameDetails->home_goal . "</b> - " . $gameDetails->game->home . (($compareDetails && $compareDetails->home_goal-$gameDetails->home_goal) ? ' ⬆️'.'('.($gameDetails->home_goal-$compareDetails->home_goal).')' : '') . PHP_EOL .
+        "👕   <b>" . $gameDetails->guest_goal . "</b> - " . $gameDetails->game->guest . (($compareDetails && $compareDetails->guest_goal-$gameDetails->guest_goal) ? ' ⬆️'.'('.($gameDetails->guest_goal-$compareDetails->guest_goal).')' : '') . PHP_EOL . PHP_EOL .
 
-        "🔸   Escanteios: " . $gameDetails->home_corner . " <b>x</b> " . $gameDetails->guest_corner . PHP_EOL .
-        "🔸   Chute a gol: " . $gameDetails->home_on_target . " <b>x</b> " . $gameDetails->guest_on_target . PHP_EOL .
-        "🔸   Chute para fora: " . $gameDetails->home_off_target . " <b>x</b> " . $gameDetails->guest_off_target . PHP_EOL .
-        "🔸   Cartões Vermelhos: " . $gameDetails->home_red . " <b>x</b> " . $gameDetails->guest_red;
+        "🔸   Escanteios: " . (($compareDetails && $compareDetails->home_corner-$gameDetails->home_corner) ? '('.($gameDetails->home_corner-$compareDetails->home_corner).')⬆️ ' : '') . $gameDetails->home_corner . " <b>x</b> " . $gameDetails->guest_corner . (($compareDetails && $compareDetails->guest_corner-$gameDetails->guest_corner) ? ' ⬆️'.'('.($gameDetails->guest_corner-$compareDetails->guest_corner).')' : '') . PHP_EOL .
+        "🔸   Chute a gol: " . (($compareDetails && $compareDetails->home_on_target-$gameDetails->home_on_target) ? '('.($gameDetails->home_on_target-$compareDetails->home_on_target).')⬆️ ' : '') . $gameDetails->home_on_target . " <b>x</b> " . $gameDetails->guest_on_target . (($compareDetails && $compareDetails->guest_on_target-$gameDetails->guest_on_target) ? ' ⬆️'.'('.($gameDetails->guest_on_target-$compareDetails->guest_on_target).')' : '') . PHP_EOL .
+        "🔸   Chute para fora: " . (($compareDetails && $compareDetails->home_off_target-$gameDetails->home_off_target) ? '('.($gameDetails->home_off_target-$compareDetails->home_off_target).')⬆️ ' : '') . $gameDetails->home_off_target . " <b>x</b> " . $gameDetails->guest_off_target . (($compareDetails && $compareDetails->guest_off_target-$gameDetails->guest_off_target) ? ' ⬆️'.'('.($gameDetails->guest_off_target-$compareDetails->guest_off_target).')' : '') . PHP_EOL .
+        "🔸   Cartões Vermelhos: " . (($compareDetails && $compareDetails->home_red-$gameDetails->home_red) ? '('.($gameDetails->home_red-$compareDetails->home_red).')⬆️ ' : '') . $gameDetails->home_red . " <b>x</b> " . $gameDetails->guest_red . (($compareDetails && $compareDetails->guest_red-$gameDetails->guest_red) ? ' ⬆️'.'('.($gameDetails->guest_red-$compareDetails->guest_red).')' : '');
 
         if($gameDetails->game->half == 2){
             $message = $message .

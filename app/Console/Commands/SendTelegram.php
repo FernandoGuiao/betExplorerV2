@@ -46,7 +46,7 @@ class SendTelegram extends Command
                     $options['reply_markup'] = [
                         'inline_keyboard' => [
                             [
-                                ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id],
+                                ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id .' '.$row->id],
                             ],
 //                            [
 //                                ['text' => 'Atualizar status', 'callback_data' => 'gameStatusNow ' . $row->game_id], // Colocar botão de ver últimos jogos dos times (time 1)

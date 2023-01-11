@@ -13,12 +13,15 @@ use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
 
 class GameHandler
 {
-    public function gameStatusNow(Nutgram $bot, $param): void
+    public function gameStatusNow(Nutgram $bot, $param, $msg_id): void
     {
 
         Log::info('ConfigHandler@gameStatusNow: ' . $param);
+        Log::info('ConfigHandler@gameStatusNow: ' . $msg_id);
 
         try {
+            $compareDetail = GameDetail::find($msg_id);
+
             $latestGameDetail = GameDetail::with('game')->whereHas('game', function ($query) use ($param) {
                 $query->where('id', $param);
             })->latest()->first();
@@ -30,7 +33,7 @@ class GameHandler
             $options['reply_markup'] = [
                 'inline_keyboard' => [
                     [
-                        ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $param]
+                        ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $param . ' '. $latestGameDetail->id ]
                         // ['text' => 'Busca histórico recente', 'callback_data' => 'gameHistory ' . $param], 
                     ],
 
@@ -38,7 +41,7 @@ class GameHandler
             ];
 
             $bot->sendMessage(
-                VerifyData::makeMessage($latestGameDetail),
+                VerifyData::makeMessage($latestGameDetail, null, $compareDetail),
                 $options
             );
 
