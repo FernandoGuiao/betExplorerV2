@@ -46,7 +46,7 @@ class VerifyData extends Command
             $sum_goals = $row->home_goal+$row->guest_goal;
             $sh_sum_goals = ($row->home_goal+$row->guest_goal)-($row->first_half_home_goal+$row->first_half_guest_goal);
             $diff_goals = abs($row->home_goal-$row->guest_goal);
-            
+
             $configs = DB::select( DB::raw("SELECT A.* FROM user_configs A
                 WHERE (min_time is null OR min_time <= '$row->time') AND
                 (max_time is null OR max_time >= '$row->time') AND
@@ -70,8 +70,8 @@ class VerifyData extends Command
                 (second_half_max_sum_corners is null OR second_half_max_sum_corners >= '$sh_sum_corners') AND
                 (min_sum_red is null OR min_sum_red <= '$sum_red') AND
                 (second_half_min_sum_red is null OR second_half_min_sum_red <= '$sh_sum_red') AND
-                (max_sum_red is null OR max_sum_red >= '$sum_red') AND 
-                (second_half_max_sum_red is null OR second_half_max_sum_red >= '$sh_sum_red') AND 
+                (max_sum_red is null OR max_sum_red >= '$sum_red') AND
+                (second_half_max_sum_red is null OR second_half_max_sum_red >= '$sh_sum_red') AND
                 A.status = 1
             "));
 
@@ -96,8 +96,9 @@ class VerifyData extends Command
                         'user_config_id' => $config->id,
                         'game_id' => $row->game->id
                     ]);
-                }
 
+                    DB::table('user_configs')->where('id', $config->id)->increment('activated_count');
+                }
             }
             $row->status = 1;
             $row->save();
@@ -130,7 +131,7 @@ class VerifyData extends Command
             "🔸   Chute a gol: " . $gameDetails->first_half_home_on_target . " <b>x</b> " . $gameDetails->first_half_guest_on_target . PHP_EOL .
             "🔸   Chute para fora: " . $gameDetails->first_half_home_off_target . " <b>x</b> " . $gameDetails->first_half_guest_off_target . PHP_EOL .
             "🔸   Cartões Vermelhos: " . $gameDetails->first_half_home_red . " <b>x</b> " . $gameDetails->first_half_guest_red;
-            
+
             $message = $message .
             PHP_EOL . PHP_EOL .
             "🔸   -- Segundo Tempo --" . PHP_EOL .

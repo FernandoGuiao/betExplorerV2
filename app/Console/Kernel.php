@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
          $schedule->command('update:games')->everyMinute();
          $schedule->command('verify:data')->everyMinute();
          $schedule->command('send:telegram')->everyMinute();
+         $schedule->command('telescope:prune')->daily();
 
-         $schedule->command('telescope:prune --hours=48')->daily();
     }
 
     /**
