@@ -138,7 +138,7 @@ class VerifyData extends Command
             "🔸   Escanteios: " . ($gameDetails->home_corner-$gameDetails->first_half_home_corner) . " <b>x</b> " . ($gameDetails->guest_corner-$gameDetails->first_half_guest_corner) . PHP_EOL .
             "🔸   Chute a gol: " . ($gameDetails->home_on_target-$gameDetails->first_half_home_on_target) . " <b>x</b> " . ($gameDetails->guest_on_target-$gameDetails->first_half_guest_on_target) . PHP_EOL .
             "🔸   Chute para fora: " . ($gameDetails->home_off_target-$gameDetails->first_half_home_off_target) . " <b>x</b> " . ($gameDetails->guest_off_target-$gameDetails->first_half_guest_off_target) . PHP_EOL .
-            "🔸   Cartões Vermelhos: " . ($gameDetails->home_red-$gameDetails->first_half_home_red) . " <b>x</b> " . ($gameDetails->home_red-$gameDetails->first_half_home_red);
+            "🔸   Cartões Vermelhos: " . ($gameDetails->home_red-$gameDetails->first_half_home_red) . " <b>x</b> " . ($gameDetails->guest_red-$gameDetails->first_half_guest_red);
         }
 
         return $message;
