@@ -11,66 +11,44 @@ use Illuminate\Support\Facades\Log;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
 
-class GameHandler
+class AdminHandler
 {
-    public function gameStatusNow(Nutgram $bot, $param, $msg_id): void
+    public function broadcast(Nutgram $bot, $param): void
     {
+        $message = $bot->message()->text;
+        Log::info('AdminHandler@broadcast: ' . $param);
+        $user = User::where('id', $bot->user()->id)->first();
 
-        Log::info('ConfigHandler@gameStatusNow: ' . $param);
-        Log::info('ConfigHandler@gameStatusNow: ' . $msg_id);
+        if (!$user->is_admin) {
+            $bot->sendMessage("❌ Somente administradores podem fazer essa ação.");
+            return;
+        }
 
         try {
-            $compareDetail = GameDetail::find($msg_id);
 
-            $latestGameDetail = GameDetail::with('game')->whereHas('game', function ($query) use ($param) {
-                $query->where('id', $param);
-            })->latest()->first();
+            $users = User::withActiveConfig()->get();
+            $message = str_replace('/broadcast ', '', $message);
 
-            $options = [
-                'parse_mode' => ParseMode::HTML,
-            ];
-
-            $options['reply_markup'] = [
-                'inline_keyboard' => [
-                    [
-                        ['text' => '🔄️  Atualizar status', 'callback_data' => 'gameStatusNow ' . $param . ' '. $latestGameDetail->id ]
-                        // ['text' => 'Busca histórico recente', 'callback_data' => 'gameHistory ' . $param], 
-                    ],
-
-                ],
-            ];
-
-            $bot->sendMessage(
-                VerifyData::makeMessage($latestGameDetail, null, $compareDetail),
-                $options
-            );
+            foreach ($users as $user) {
+                try {
+                    $bot->sendMessage(
+                        "🚨  <b>Mensagem dos administradores:</b>  🚨" . PHP_EOL . PHP_EOL .
+                        $message,
+                        [
+                            'chat_id' => $user->id,
+                            'parse_mode' => 'HTML',
+                        ]
+                    );
+                } catch (\Exception $e) {
+                    Log::alert('AdminHandler@broadcast: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+                    $bot->sendMessage("❌ Erro ao mandar mensagem para usuário. Nome: " . $user->name);
+                }
+            }
 
         } catch (\Exception $e) {
             Log::alert('ConfigHandler@gameStatusNow: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            $bot->sendMessage("❌ Erro ao enviar atualização de jogo.");
+            $bot->sendMessage("❌ Erro ao enviar todas as mensagens de broadcast.");
         }
     }
 
-    public function gameHistory(Nutgram $bot, $param): void
-    {
-        Log::info('ConfigHandler@gameHistory: ' . $param);
-
-        try {
-            $game = Game::find($param)->first();
-            Log::info('ConfigHandler@gameHistory: ' . $game->home);
-
-            if($game->requested == 2){
-                $bot->sendMessage(json_encode($game->extra));
-            }else{
-                $game->requested = 1;
-                $game->requested_user = $bot->user()->id;
-                $bot->sendMessage("O histórico foi solicitado. Aguarde um momento enquanto buscamos em nossa base.");
-            }
-            $game->save();
-
-        } catch (\Exception $e) {
-            Log::alert('ConfigHandler@gameHistory: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            $bot->sendMessage("❌ Erro ao enviar histórico dos times.");
-        }
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\AdminHandler;
 use App\Handlers\ConfigHandler;
 use App\Handlers\GameHandler;
 use App\Http\Middleware\Telegram\MustBeRegisteredMiddleware;
@@ -51,7 +52,7 @@ class TelegramController
 
         $bot->onCallbackQueryData('gameStatusNow {param} {msg_id}', [GameHandler::class, 'gameStatusNow']);
 
-        // $bot->onCallbackQueryData('gameHistory {param}', [GameHandler::class, 'gameHistory']);
+        $bot->onCommand('broadcast {param}', [AdminHandler::class, 'broadcast']);
 
         $bot->registerMyCommands();
 

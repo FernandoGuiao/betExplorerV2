@@ -37,4 +37,12 @@ class User extends Authenticatable
     function userConfig(){
         return $this->hasMany(UserConfig::class);
     }
+
+    function scopeWithActiveConfig($query){
+        return $query->whereHas('userConfig', function ($q) {
+            $q->where('status', 1);
+        })->with('userConfig', function ($q2) {
+            $q2->where('status', 1);
+        });
+    }
 }
