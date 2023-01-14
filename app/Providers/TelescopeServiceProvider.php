@@ -30,6 +30,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                    $entry->isFailedJob() ||
                    $entry->isScheduledTask() ||
                    $entry->isDump() ||
+                   $entry->type == 'log' ||
                    $entry->hasMonitoredTag();
         });
     }
