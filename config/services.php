@@ -33,6 +33,7 @@ return [
 
     'telegram' => [
         'token' => env('TELEGRAM_TOKEN', ''),
+        'max_configs' => env('TELEGRAM_MAX_CONFIGS', 5),
     ]
 
 ];

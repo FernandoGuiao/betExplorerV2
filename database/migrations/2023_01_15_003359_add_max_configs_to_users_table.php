@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('max_configs')->default(2)->after('is_admin');
+            $table->integer('max_configs')->default(5)->after('is_admin');
         });
     }
 
