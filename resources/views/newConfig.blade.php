@@ -215,7 +215,7 @@
         console.log("error:", error)
     }
 
-    function submitForm() {
+    async function submitForm() {
         let form = document.getElementById("form");
         console.log(form);
         mainButton.hide();
@@ -223,7 +223,7 @@
         let formData = new FormData(form);
         console.log(Object.fromEntries(formData));
 
-        fetch('api/new-config', {
+        let response = await fetch('api/new-config', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -231,22 +231,30 @@
                 "X-Requested-With": "XMLHttpRequest",
             },
             body: JSON.stringify(Object.fromEntries(formData))
-        }).then(
-            function (response) {
-                if (response.status !== 201) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status);
-                    window.Telegram.WebApp.showAlert("Houve um erro ao salvar a configuração", () => window.Telegram.WebApp.close());
-                    mainButton.show();
-                    return;
-                }
+        })
+        let data = await response.json();
 
-                response.json().then(function (data) {
-                    window.Telegram.WebApp.showAlert("Configuração salva com sucesso!", () => window.Telegram.WebApp.close());
-                    console.log(data);
-                });
-            }
-        )
+        if (response.status === 422) {
+            console.log('Erro 422');
+            window.Telegram.WebApp.showAlert("Erro: " + data.error, () => window.Telegram.WebApp.close());
+            mainButton.show();
+            return;
+        }
+
+        if (response.status === 201) {
+            window.Telegram.WebApp.showAlert("Configuração salva com sucesso!", () => window.Telegram.WebApp.close());
+            console.log(data);
+            return;
+        }
+
+        if (response.status !== 201) {
+            console.log('Looks like there was a problem.');
+            window.Telegram.WebApp.showAlert("Ocorreu um erro inesperado", () => window.Telegram.WebApp.close());
+            mainButton.show();
+            return;
+        }
+
+
     }
 
 
