@@ -31,11 +31,9 @@ body{
 }
 
 .img_bg{
-    background-color: floralwhite;
+    background-color: beige;
     border-radius: 100%;
     padding: 4vw;
-    /*max-width: 21.5vw;*/
-
 }
 
 .input_group {
@@ -93,3 +91,41 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.details_container {
+    max-width: 100vw;
+    font-family: sans-serif;
+    justify-content: center;
+}
+
+details {
+    background: #ffffff;
+    color: #333333;
+    border-radius: 1rem;
+}
+
+details summary {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    font-variant: all-small-caps;
+    font-size: 4vw;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+details:not([open]) summary:hover,
+details:not([open]) summary:focus {
+    /*background: #f6f6f6;*/
+    /*color: #454545;*/
+}
+
+details[open] summary {
+    /*border: 1px solid #003eff;*/
+    /*background: #007fff;*/
+    /*color: #ffffff;*/
+}
+
+details main {
+    border: #a5ebc2;
+    border-radius: 1rem;
+}

@@ -9,173 +9,145 @@
 
 </head>
 <body class="secondary_bg_color">
-    <div class="body_container secondary_bg_color">
-        <form id="form">
-            @csrf
-            <div class="row">
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/stopwatch.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Minutos</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_time" name="min_time"
-                                   placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_time" name="max_time"
-                                   placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
+<div class="body_container secondary_bg_color">
+    <form id="form">
+        @csrf
+        <div class="details_container bg_color text_color">
+            <details class="secondary_bg_color text_color">
+                <summary class="bg_color text_color">Tempo total de jogo</summary>
+            </details>
+        </div>
+        <div class="row">
 
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/shot.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Chutes</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_sum_shoots"
-                                   name="min_sum_shoots" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_sum_shoots"
-                                   name="max_sum_shoots" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
+            <x-config-card
+                icon="{{ asset('svg/stopwatch.svg') }}"
+                text="Minutos"
+                minName="min_time"
+                maxName="max_time"
+            />
 
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/goal.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Gols</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_sum_goals"
-                                   name="min_sum_goals" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_sum_goals"
-                                   name="max_sum_goals" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-config-card
+                icon="{{ asset('svg/shot.svg') }}"
+                text="Chutes"
+                minName="min_sum_shoots"
+                maxName="max_sum_shoots"
+            />
 
-            {{--  segunda linha  --}}
-            <div class="row">
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/shot-on-target.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Chutes a Gol</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_sum_shoots_on_target"
-                                   name="min_sum_shoots_on_target" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_sum_shoots_on_target"
-                                   name="max_sum_shoots_on_target" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
+            <x-config-card
+                icon="{{ asset('svg/goal.svg') }}"
+                text="Gols"
+                minName="min_sum_goals"
+                maxName="max_sum_goals"
+            />
 
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/card.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Cartões Vermelhos</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_sum_red"
-                                   name="min_sum_red" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_sum_red"
-                                   name="max_sum_red" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
+        </div>
 
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/corner.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Total de Escanteios</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_sum_corners"
-                                   name="min_sum_corners" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_sum_corners"
-                                   name="max_sum_corners" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
+        {{--  segunda linha  --}}
 
-            </div>
+        <div class="row">
 
-            {{--  terceira linha  --}}
-
-            <div class="row">
-
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/scoreboard.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Diferença de Gols</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="min_diff_goals"
-                                   name="min_diff_goals" placeholder="min"/>
-                        </div>
-                        <div class="input_group">
-                            <input type="number" class="text_color bg_color" id="max_diff_goals"
-                                   name="max_diff_goals" placeholder="max"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="block_container">
-                    <div class="img_container bg_color">
-                        <div class="img_bg">
-                            <img class="img_icon" src="{{ asset('svg/smartphone.svg') }}" alt="My SVG Icon">
-                        </div>
-                        <div class="img_text text_color">Nome da config</div>
-                    </div>
-                    <div class="inputs_container">
-                        <div class="input_group">
-                            <input type="text" class="text_color bg_color text_double" id="name" name="name" placeholder="..."/>
-                        </div>
-                    </div>
-                </div>
+            <x-config-card
+                icon="{{ asset('svg/shot-on-target.svg') }}"
+                text="Chutes a Gol"
+                minName="min_sum_shoots_on_target"
+                maxName="max_sum_shoots_on_target"
+            />
 
 
-            </div>
-            <input type="number" id="status" name="status" value=1 hidden/>
-            <input type="number" id="user_id" name="user_id" hidden/>
-        </form>
+            <x-config-card
+                icon="{{ asset('svg/card.svg') }}"
+                text="Cartões Vermelhos"
+                minName="min_sum_red"
+                maxName="max_sum_red"
+            />
 
-    </div>
+            <x-config-card
+                icon="{{ asset('svg/corner.svg') }}"
+                text="Total de Escanteios"
+                minName="min_sum_corners"
+                maxName="max_sum_corners"
+            />
+
+        </div>
+
+        {{--  terceira linha  --}}
+
+        <div class="row">
+
+            <x-config-card
+                icon="{{ asset('svg/scoreboard.svg') }}"
+                text="Diferença de Gols"
+                minName="min_diff_goals"
+                maxName="max_diff_goals"
+            />
+
+            <x-config-card
+                icon="{{ asset('svg/smartphone.svg') }}"
+                text="Nome da config"
+                minName="name"
+                maxName="name"
+                minPlaceholder="..."
+                inputType="text"
+            />
+
+        </div>
+
+        {{--  Configs segundo tempo  --}}
+
+        <div class="details_container bg_color text_color">
+            <details class="secondary_bg_color text_color">
+                <summary class="bg_color text_color">Exclusivamente Segundo Tempo ↓</summary>
+                <main>
+                    <div class="row">
+                        <x-config-card
+                            icon="{{ asset('svg/goal.svg') }}"
+                            text="Gols"
+                            minName="second_half_min_sum_goals"
+                            maxName="second_half_max_sum_goals"
+                            bgColor="#90ee90"
+                        />
+                        <x-config-card
+                            icon="{{ asset('svg/shot.svg') }}"
+                            text="Chutes"
+                            minName="second_half_min_sum_shoots"
+                            maxName="second_half_max_sum_shoots"
+                            bgColor="#90ee90"
+                        />
+                        <x-config-card
+                            icon="{{ asset('svg/corner.svg') }}"
+                            text="Escanteios"
+                            minName="second_half_min_sum_corners"
+                            maxName="second_half_max_sum_corners"
+                            bgColor="#90ee90"
+                        />
+
+                    </div>
+                    <div class="row">
+                        <x-config-card
+                            icon="{{ asset('svg/shot-on-target.svg') }}"
+                            text="Chute a Gol"
+                            minName="second_half_min_sum_shoots_on_target"
+                            maxName="second_half_max_sum_shoots_on_target"
+                            bgColor="#90ee90"
+                        />
+                        <x-config-card
+                            icon="{{ asset('svg/card.svg') }}"
+                            text="Cartões Vermelhos"
+                            minName="second_half_min_sum_red"
+                            maxName="second_half_max_sum_red"
+                            bgColor="#90ee90"
+                        />
+                    </div>
+                </main>
+            </details>
+        </div>
+
+        <input type="number" id="status" name="status" value=1 hidden/>
+        <input type="number" id="user_id" name="user_id" hidden/>
+
+    </form>
+
+</div>
 </body>
 
 <script>
@@ -251,7 +223,7 @@
             console.log('Looks like there was a problem.');
             window.Telegram.WebApp.showAlert("Ocorreu um erro inesperado", () => window.Telegram.WebApp.close());
             mainButton.show();
-            return;
+
         }
 
 
