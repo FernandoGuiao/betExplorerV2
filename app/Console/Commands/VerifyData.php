@@ -46,6 +46,9 @@ class VerifyData extends Command
             $sum_goals = $row->home_goal+$row->guest_goal;
             $sh_sum_goals = ($row->home_goal+$row->guest_goal)-($row->first_half_home_goal+$row->first_half_guest_goal);
             $diff_goals = abs($row->home_goal-$row->guest_goal);
+            $diff_shoots = abs(($row->home_on_target+$row->home_off_target)-($row->guest_on_target+$row->guest_off_target));
+            $sh_diff_shoots = abs(($row->home_on_target+$row->home_off_target)-($row->guest_on_target+$row->guest_off_target))-($row->first_half_home_on_target+$row->first_half_home_off_target+$row->first_half_guest_on_target+$row->first_half_guest_off_target);
+            $diff_reds = abs($row->home_red-$row->guest_red);
 
             $configs = DB::select( DB::raw("SELECT A.* FROM user_configs A
                 WHERE (min_time is null OR min_time <= '$row->time') AND
@@ -56,6 +59,12 @@ class VerifyData extends Command
                 (second_half_max_sum_goals is null OR second_half_max_sum_goals >= '$sh_sum_goals') AND
                 (min_diff_goals is null OR min_diff_goals <= '$diff_goals') AND
                 (max_diff_goals is null OR max_diff_goals >= '$diff_goals') AND
+                (min_diff_red is null OR min_diff_red <= '$diff_reds') AND
+                (max_diff_red is null OR max_diff_red >= '$diff_goals') AND
+                (min_diff_shoots is null OR min_diff_shoots <= '$diff_shoots') AND
+                (max_diff_shoots is null OR max_diff_shoots >= '$diff_shoots') AND
+                (second_half_min_diff_shoots is null OR second_half_min_diff_shoots <= '$sh_diff_shoots') AND
+                (second_half_max_diff_shoots is null OR second_half_max_diff_shoots >= '$sh_diff_shoots') AND
                 (min_sum_shoots is null OR min_sum_shoots <= '$sum_shoots') AND
                 (second_half_min_sum_shoots is null OR second_half_min_sum_shoots <= '$sh_sum_shoots') AND
                 (max_sum_shoots is null OR max_sum_shoots >= '$sum_shoots') AND
