@@ -12,18 +12,34 @@
 <div class="body_container secondary_bg_color">
     <form id="form">
         @csrf
-        <div class="details_container bg_color text_color">
-            <details class="secondary_bg_color text_color">
-                <summary class="bg_color text_color">Tempo total de jogo</summary>
-            </details>
-        </div>
         <div class="row">
-
+            <x-config-card
+                icon="{{ asset('svg/smartphone.svg') }}"
+                text="Nome"
+                minName="name"
+                maxName="name"
+                minPlaceholder="..."
+                inputType="text"
+            />
             <x-config-card
                 icon="{{ asset('svg/stopwatch.svg') }}"
                 text="Minutos"
                 minName="min_time"
                 maxName="max_time"
+            />
+        </div>
+        <div class="details_container secondary_bg_color text_color">
+            <div class="details summary bg_color text_color">
+                <div class="text_color details-title">Total do Jogo</div>
+            </div>
+        </div>
+        <div class="row">
+
+            <x-config-card
+                icon="{{ asset('svg/goal.svg') }}"
+                text="Gols"
+                minName="min_sum_goals"
+                maxName="max_sum_goals"
             />
 
             <x-config-card
@@ -34,10 +50,10 @@
             />
 
             <x-config-card
-                icon="{{ asset('svg/goal.svg') }}"
-                text="Gols"
-                minName="min_sum_goals"
-                maxName="max_sum_goals"
+                icon="{{ asset('svg/corner.svg') }}"
+                text="Escanteios"
+                minName="min_sum_corners"
+                maxName="max_sum_corners"
             />
 
         </div>
@@ -62,10 +78,10 @@
             />
 
             <x-config-card
-                icon="{{ asset('svg/corner.svg') }}"
-                text="Total de Escanteios"
-                minName="min_sum_corners"
-                maxName="max_sum_corners"
+                icon="{{ asset('svg/scoreboard.svg') }}"
+                text="Diferença de Gols"
+                minName="min_diff_goals"
+                maxName="max_diff_goals"
             />
 
         </div>
@@ -74,72 +90,56 @@
 
         <div class="row">
 
-            <x-config-card
-                icon="{{ asset('svg/scoreboard.svg') }}"
-                text="Diferença de Gols"
-                minName="min_diff_goals"
-                maxName="max_diff_goals"
-            />
 
-            <x-config-card
-                icon="{{ asset('svg/smartphone.svg') }}"
-                text="Nome da config"
-                minName="name"
-                maxName="name"
-                minPlaceholder="..."
-                inputType="text"
-            />
 
         </div>
 
         {{--  Configs segundo tempo  --}}
 
-        <div class="details_container bg_color text_color">
-            <details class="secondary_bg_color text_color">
-                <summary class="bg_color text_color">Exclusivamente Segundo Tempo ↓</summary>
-                <main>
-                    <div class="row">
-                        <x-config-card
-                            icon="{{ asset('svg/goal.svg') }}"
-                            text="Gols"
-                            minName="second_half_min_sum_goals"
-                            maxName="second_half_max_sum_goals"
-                            bgColor="#90ee90"
-                        />
-                        <x-config-card
-                            icon="{{ asset('svg/shot.svg') }}"
-                            text="Chutes"
-                            minName="second_half_min_sum_shoots"
-                            maxName="second_half_max_sum_shoots"
-                            bgColor="#90ee90"
-                        />
-                        <x-config-card
-                            icon="{{ asset('svg/corner.svg') }}"
-                            text="Escanteios"
-                            minName="second_half_min_sum_corners"
-                            maxName="second_half_max_sum_corners"
-                            bgColor="#90ee90"
-                        />
+        <div class="details_container secondary_bg_color text_color">
+            <div class="details summary bg_color text_color">
+                <div class="text_color details-title">↓ Exclusivamente Segundo Tempo ↓</div>
+            </div>
+            <div class="row">
+                <x-config-card
+                    icon="{{ asset('svg/goal.svg') }}"
+                    text="Gols"
+                    minName="second_half_min_sum_goals"
+                    maxName="second_half_max_sum_goals"
+                    bgColor="#90ee90"
+                />
+                <x-config-card
+                    icon="{{ asset('svg/shot.svg') }}"
+                    text="Chutes"
+                    minName="second_half_min_sum_shoots"
+                    maxName="second_half_max_sum_shoots"
+                    bgColor="#90ee90"
+                />
+                <x-config-card
+                    icon="{{ asset('svg/corner.svg') }}"
+                    text="Escanteios"
+                    minName="second_half_min_sum_corners"
+                    maxName="second_half_max_sum_corners"
+                    bgColor="#90ee90"
+                />
 
-                    </div>
-                    <div class="row">
-                        <x-config-card
-                            icon="{{ asset('svg/shot-on-target.svg') }}"
-                            text="Chute a Gol"
-                            minName="second_half_min_sum_shoots_on_target"
-                            maxName="second_half_max_sum_shoots_on_target"
-                            bgColor="#90ee90"
-                        />
-                        <x-config-card
-                            icon="{{ asset('svg/card.svg') }}"
-                            text="Cartões Vermelhos"
-                            minName="second_half_min_sum_red"
-                            maxName="second_half_max_sum_red"
-                            bgColor="#90ee90"
-                        />
-                    </div>
-                </main>
-            </details>
+            </div>
+            <div class="row">
+                <x-config-card
+                    icon="{{ asset('svg/shot-on-target.svg') }}"
+                    text="Chute a Gol"
+                    minName="second_half_min_sum_shoots_on_target"
+                    maxName="second_half_max_sum_shoots_on_target"
+                    bgColor="#90ee90"
+                />
+                <x-config-card
+                    icon="{{ asset('svg/card.svg') }}"
+                    text="Cartões Vermelhos"
+                    minName="second_half_min_sum_red"
+                    maxName="second_half_max_sum_red"
+                    bgColor="#90ee90"
+                />
+            </div>
         </div>
 
         <input type="number" id="status" name="status" value=1 hidden/>

@@ -73,8 +73,7 @@ input {
 
 .img_text {
     text-align: center;
-    font-size: 4vw;
-    font-weight: bold;
+    font-size: 3.5vw;
     margin-top: 1rem;
     font-variant: all-small-caps;
 }
@@ -97,20 +96,28 @@ input[type=number] {
     justify-content: center;
 }
 
-details {
+.details {
     background: #ffffff;
     color: #333333;
     border-radius: 1rem;
+    text-align: center;
 }
 
-details summary {
-    display: block;
+.details-title {
+    width: 100%;
+}
+
+.details.summary {
+    display: flex;
     cursor: pointer;
     text-align: center;
     font-variant: all-small-caps;
     font-size: 4vw;
     font-weight: bold;
     padding: 0.5rem;
+    height: 8vw;
+    align-items: center;
+    margin: 1vw;
 }
 
 details:not([open]) summary:hover,
