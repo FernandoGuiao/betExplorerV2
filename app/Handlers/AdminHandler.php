@@ -34,7 +34,7 @@ class AdminHandler
                     $bot->sendMessage(
                         "🚨  <b>Mensagem dos administradores:</b>  🚨" . PHP_EOL . PHP_EOL .
                         $message . PHP_EOL . PHP_EOL .
-                        "👉  <b>Admin: </b> @" . $bot->user()->username . " 👈",
+                        "👉  <b>Admin: </b> @" . $bot->user()->username . "  👈",
 
                         [
                             'chat_id' => $user->id,
