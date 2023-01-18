@@ -10,6 +10,7 @@ use App\Models\UserConfig;
 use Illuminate\Support\Facades\Log;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Attributes\ParseMode;
+use Illuminate\Support\Facades\DB;
 
 class AdminHandler
 {
