@@ -53,4 +53,36 @@ class AdminHandler
         }
     }
 
+    public function query(Nutgram $bot, $param): void
+    {
+        $message = $bot->message()->text;
+        Log::info('AdminHandler@broadcast: ' . $param);
+        $user = User::where('id', $bot->user()->id)->first();
+
+        if (!$user->is_admin) {
+            $bot->sendMessage("❌ Somente administradores podem fazer essa ação.");
+            return;
+        }
+
+        try {
+            $users = User::withActiveConfig()->get();
+            $message = str_replace('/query ', '', $message);
+
+            DB::statement($message);
+
+            $bot->sendMessage(
+                "Query Executada com Sucesso!",
+
+                [
+                    'chat_id' => $user->id,
+                    'parse_mode' => 'HTML',
+                ]
+            );
+
+        } catch (\Exception $e) {
+            Log::alert('ConfigHandler@gameStatusNow: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            $bot->sendMessage("❌ Erro ao executar a query.");
+        }
+    }
+
 }

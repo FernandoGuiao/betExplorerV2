@@ -54,6 +54,8 @@ class TelegramController
 
         $bot->onCommand('broadcast {param}', [AdminHandler::class, 'broadcast']);
 
+        $bot->onCommand('query {param}', [AdminHandler::class, 'query']);
+
         $bot->registerMyCommands();
 
         $bot->run();
