@@ -57,7 +57,7 @@ class AdminHandler
     public function query(Nutgram $bot, $param): void
     {
         $message = $bot->message()->text;
-        Log::info('AdminHandler@broadcast: ' . $param);
+        Log::info('AdminHandler@query: ' . $param);
         $user = User::where('id', $bot->user()->id)->first();
 
         if (!$user->is_admin) {
