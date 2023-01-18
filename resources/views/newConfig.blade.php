@@ -56,6 +56,7 @@
                 maxName="max_sum_corners"
             />
 
+
         </div>
 
         {{--  segunda linha  --}}
@@ -90,6 +91,19 @@
 
         <div class="row">
 
+            <x-config-card
+                icon="{{ asset('svg/shot.svg') }}"
+                text="Diferença de Chutes"
+                minName="min_diff_shoots"
+                maxName="max_diff_shoots"
+            />
+
+            <x-config-card
+                icon="{{ asset('svg/card.svg') }}"
+                text="Diferença Vermelhos"
+                minName="min_diff_red"
+                maxName="max_diff_red"
+            />
 
 
         </div>
@@ -137,6 +151,13 @@
                     text="Cartões Vermelhos"
                     minName="second_half_min_sum_red"
                     maxName="second_half_max_sum_red"
+                    bgColor="#90ee90"
+                />
+                <x-config-card
+                    icon="{{ asset('svg/shot.svg') }}"
+                    text="Diferença de Chutes"
+                    minName="second_half_min_diff_shoots"
+                    maxName="second_half_max_diff_shoots"
                     bgColor="#90ee90"
                 />
             </div>
