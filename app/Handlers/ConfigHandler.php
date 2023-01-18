@@ -122,8 +122,8 @@ class ConfigHandler
                 "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
                 "⛳ (2º Tempo) Escanteios: " . ($config->second_half_min_sum_corners ?? "X") . " - " . ($config->second_half_max_sum_corners ?? "X") . PHP_EOL .
                 "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X") . PHP_EOL .
-                "🔴 (2º Tempo) Cartões Vermelhos: " . ($config->second_half_min_sum_red ?? "X") . " - " . ($config->second_half_max_sum_red ?? "X"),
-                "🔴 Diferença de Cartões Vermelhos: " . ($config->min_diff_red ?? "X") . " - " . ($config->max_diff_red ?? "X") . PHP_EOL .
+                "🔴 (2º Tempo) Cartões Vermelhos: " . ($config->second_half_min_sum_red ?? "X") . " - " . ($config->second_half_max_sum_red ?? "X") . PHP_EOL .
+                "🔴 Diferença de Cartões Vermelhos: " . ($config->min_diff_red ?? "X") . " - " . ($config->max_diff_red ?? "X"),
                 [
                     'parse_mode' => ParseMode::HTML,
                     'reply_markup' => [
