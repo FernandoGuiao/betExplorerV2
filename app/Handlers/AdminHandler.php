@@ -49,7 +49,7 @@ class AdminHandler
             }
 
         } catch (\Exception $e) {
-            Log::alert('ConfigHandler@gameStatusNow: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::alert('AdminHandler@broadcast: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             $bot->sendMessage("❌ Erro ao enviar todas as mensagens de broadcast.");
         }
     }
@@ -81,7 +81,7 @@ class AdminHandler
             );
 
         } catch (\Exception $e) {
-            Log::alert('ConfigHandler@gameStatusNow: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::alert('AdminHandler@query: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             $bot->sendMessage("❌ Erro ao executar a query.");
         }
     }
