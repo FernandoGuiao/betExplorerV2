@@ -15,7 +15,6 @@ class MustBeRegisteredMiddleware
             [
                 'id' => $bot->user()->id,
                 'name' => $bot->user()->first_name . ($bot->user()->last_name ? " " . $bot->user()->last_name : ""),
-                'max_configs' => config('services.telegram.max_configs'),
             ]
         );
 

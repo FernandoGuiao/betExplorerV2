@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Handlers\AdminHandler;
 use App\Handlers\ConfigHandler;
 use App\Handlers\GameHandler;
+use App\Http\Middleware\Telegram\MustBeAdmin;
 use App\Http\Middleware\Telegram\MustBeRegisteredMiddleware;
-use App\Telegram\Handlers\VetoPresidentHandler;
 use Illuminate\Support\Facades\Log;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -45,16 +45,17 @@ class TelegramController
         $bot->onCommand('configs', [ConfigHandler::class, 'show'])
             ->description('Gerenciar alertas');
 
-
         $bot->onCommand('help', [ConfigHandler::class, 'help']);
 
         $bot->onCallbackQueryData('deleteConfig {param}', [ConfigHandler::class, 'delete']);
 
         $bot->onCallbackQueryData('gameStatusNow {param} {msg_id}', [GameHandler::class, 'gameStatusNow']);
 
-        $bot->onCommand('broadcast {param}', [AdminHandler::class, 'broadcast']);
+        $bot->onCommand('broadcast {param}', [AdminHandler::class, 'broadcast'])
+            ->middleware(MustBeAdmin::class);
 
-        $bot->onCommand('query {param}', [AdminHandler::class, 'query']);
+        $bot->onCommand('query {param}', [AdminHandler::class, 'query'])
+            ->middleware(MustBeAdmin::class);
 
         $bot->registerMyCommands();
 

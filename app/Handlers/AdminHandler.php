@@ -18,12 +18,6 @@ class AdminHandler
     {
         $message = $bot->message()->text;
         Log::info('AdminHandler@broadcast: ' . $param);
-        $user = User::where('id', $bot->user()->id)->first();
-
-        if (!$user->is_admin) {
-            $bot->sendMessage("❌ Somente administradores podem fazer essa ação.");
-            return;
-        }
 
         try {
 
@@ -59,11 +53,6 @@ class AdminHandler
         $message = $bot->message()->text;
         Log::info('AdminHandler@broadcast: ' . $param);
         $user = User::where('id', $bot->user()->id)->first();
-
-        if (!$user->is_admin) {
-            $bot->sendMessage("❌ Somente administradores podem fazer essa ação.");
-            return;
-        }
 
         try {
             $users = User::withActiveConfig()->get();
