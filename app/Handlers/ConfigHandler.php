@@ -122,7 +122,7 @@ class ConfigHandler
                 "⚖️ 🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
                 "⚖️ 🔴 Diferença de Cartões Vermelhos: " . ($config->min_diff_red ?? "X") . " - " . ($config->max_diff_red ?? "X") . PHP_EOL . PHP_EOL .
                 
-                "<b><u>Exclusivamente Segundo Tempo:></u></b>". PHP_EOL .
+                "<b><u>Exclusivamente Segundo Tempo:</u></b>". PHP_EOL .
                 "🥅 Gols: " . ($config->second_half_min_sum_goals ?? "X") . " - " . ($config->second_half_max_sum_goals ?? "X") . PHP_EOL .
                 "⚽ Chutes: " . ($config->second_half_min_sum_shoots ?? "X") . " - " . ($config->second_half_max_sum_shoots ?? "X") . PHP_EOL .
                 "⚽ Chutes no gol: " . ($config->second_half_min_sum_shoots_on_target ?? "X") . " - " . ($config->second_half_max_sum_shoots_on_target ?? "X") . PHP_EOL .
