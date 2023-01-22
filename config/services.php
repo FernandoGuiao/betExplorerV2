@@ -34,6 +34,7 @@ return [
     'telegram' => [
         'token' => env('TELEGRAM_TOKEN', ''),
         'max_configs' => env('TELEGRAM_MAX_CONFIGS', 5),
+        'init_data_expire_minutes' => env('INIT_DATA_EXPIRE_MINUTES', 60),
     ]
 
 ];

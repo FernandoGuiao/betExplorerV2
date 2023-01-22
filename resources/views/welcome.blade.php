@@ -26,24 +26,30 @@
                         <a href="{{ url('/telescope') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Telescope</a>
                 </div>
 
-
+            @php
+                $key = Illuminate\Support\Str::uuid()->toString();
+            @endphp
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                <div class="flex justify-center text-center p-6 bg-gray-100 sm:rounded-lg">
+                    {!! QrCode::size(300)->generate($key) !!}
                 </div>
 
-                <div class="flex justify-center mt-8 bg-white dark:bg-gray-200 overflow-hidden shadow sm:rounded-lg">
-                    BetExplorer
+                <div class="flex justify-center text-center p-2 bg-gray-100 sm:rounded-lg mt-4">
+                    {{ $key }}
                 </div>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
                     </div>
 
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                    <div class="ml-4 text-sm text-gray-500 ">
+                        BetExplorer - Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <script>
+
+    </script>
 </html>

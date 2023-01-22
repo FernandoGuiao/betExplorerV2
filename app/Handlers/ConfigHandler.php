@@ -69,7 +69,7 @@ class ConfigHandler
                                     'text' => 'Fazer Nova Config',
                                     'web_app' => [
                                         'url' => url('/') . '/new-config',
-//                                        'url' => 'https://ck5gmkxikx.sharedwithexpose.com' . '/new-config',
+//                                        'url' => 'https://nfqpytrizi.sharedwithexpose.com' . '/new-config',
                                     ]
                                 ]
                             ]
@@ -110,25 +110,25 @@ class ConfigHandler
             $bot->sendMessage(
                 "📝 <b><u>" . ($config->name ?? "X") . "</u></b>" . PHP_EOL .
                 "⏱ Minutos: " . ($config->min_time ?? "X") . " - " . ($config->max_time ?? "X") . PHP_EOL . PHP_EOL .
-                
-                "<b><u>Tempo Total de Jogo:</u></b>". PHP_EOL .                
+
+                "<b><u>Tempo Total de Jogo:</u></b>". PHP_EOL .
                 "🥅 Gols: " . ($config->min_sum_goals ?? "X") . " - " . ($config->max_sum_goals ?? "X") . PHP_EOL .
-                "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .               
+                "⚽ Chutes: " . ($config->min_sum_shoots ?? "X") . " - " . ($config->max_sum_shoots ?? "X") . PHP_EOL .
                 "⚽ Chutes no gol: " . ($config->min_sum_shoots_on_target ?? "X") . " - " . ($config->max_sum_shoots_on_target ?? "X") . PHP_EOL .
-                "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL . 
+                "⛳ Escanteios: " . ($config->min_sum_corners ?? "X") . " - " . ($config->max_sum_corners ?? "X") . PHP_EOL .
                 "🔴 Cartões Vermelhos: " . ($config->min_sum_red ?? "X") . " - " . ($config->max_sum_red ?? "X") . PHP_EOL . PHP_EOL .
-                
+
                 "⚖️ ⚽ Diferença de Chutes: " . ($config->min_diff_shoots ?? "X") . " - " . ($config->max_diff_shoots ?? "X") . PHP_EOL .
                 "⚖️ 🥅 Diferença Gols: " . ($config->min_diff_goals ?? "X") . " - " . ($config->max_diff_goals ?? "X") . PHP_EOL .
                 "⚖️ 🔴 Diferença de Cartões Vermelhos: " . ($config->min_diff_red ?? "X") . " - " . ($config->max_diff_red ?? "X") . PHP_EOL . PHP_EOL .
-                
+
                 "<b><u>Exclusivamente Segundo Tempo:</u></b>". PHP_EOL .
                 "🥅 Gols: " . ($config->second_half_min_sum_goals ?? "X") . " - " . ($config->second_half_max_sum_goals ?? "X") . PHP_EOL .
                 "⚽ Chutes: " . ($config->second_half_min_sum_shoots ?? "X") . " - " . ($config->second_half_max_sum_shoots ?? "X") . PHP_EOL .
                 "⚽ Chutes no gol: " . ($config->second_half_min_sum_shoots_on_target ?? "X") . " - " . ($config->second_half_max_sum_shoots_on_target ?? "X") . PHP_EOL .
                 "⛳ Escanteios: " . ($config->second_half_min_sum_corners ?? "X") . " - " . ($config->second_half_max_sum_corners ?? "X") . PHP_EOL .
                 "🔴 Cartões Vermelhos: " . ($config->second_half_min_sum_red ?? "X") . " - " . ($config->second_half_max_sum_red ?? "X") . PHP_EOL . PHP_EOL .
-                
+
                 "⚖️ ⚽ Diferença de Chutes: " . ($config->second_half_min_diff_shoots ?? "X") . " - " . ($config->second_half_min_diff_shoots ?? "X"),
                 [
                     'parse_mode' => ParseMode::HTML,

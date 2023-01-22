@@ -125,54 +125,54 @@ class VerifyData extends Command
             "👕   <b>" . $gameDetails->home_goal . "</b> - " . $gameDetails->game->home . (($compareDetails && $gameDetails->home_goal - $compareDetails->home_goal) ? '   ⬆️  ' . '( ' . ($gameDetails->home_goal - $compareDetails->home_goal) . ' )' : '') . PHP_EOL .
             "👕   <b>" . $gameDetails->guest_goal . "</b> - " . $gameDetails->game->guest . (($compareDetails && $gameDetails->guest_goal - $compareDetails->guest_goal) ? '   ⬆️  ' . '( ' . ($gameDetails->guest_goal - $compareDetails->guest_goal) . ' )' : '') . PHP_EOL . PHP_EOL .
 
-            "🔸   Escanteios: " . PHP_EOL .
+            "🔸   Escanteios: " .
                 (
                     ($compareDetails && $gameDetails->home_corner - $compareDetails->home_corner) ?
-                    '          ( ' . ($gameDetails->home_corner - $compareDetails->home_corner) . ' ) ⬆️ ' :
-                    '                          '
+                    '( ' . ($gameDetails->home_corner - $compareDetails->home_corner) . ' ) ⬆️ ' :
+                    ''
                 ) .
                 "     <b>" . $gameDetails->home_corner . " x " . $gameDetails->guest_corner . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_corner - $compareDetails->guest_corner) ?
-                        '     ⬆️ ' . '( ' . ($gameDetails->guest_corner - $compareDetails->guest_corner) . ' )' :
-                        ''
+                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_corner - $compareDetails->guest_corner) . ' )' :
+                    ''
                 ) . PHP_EOL .
 
-            "🔸   Chute a gol: " . PHP_EOL .
+            "🔸   Chute a gol: " .
                 (
                     ($compareDetails && $gameDetails->home_on_target - $compareDetails->home_on_target) ?
-                        '          ( ' . ($gameDetails->home_on_target - $compareDetails->home_on_target) . ' ) ⬆️ ' :
-                        '                          '
+                    '( ' . ($gameDetails->home_on_target - $compareDetails->home_on_target) . ' ) ⬆️ ' :
+                    ''
                 ) .
                 "     <b>" . $gameDetails->home_on_target . " x " . $gameDetails->guest_on_target . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_on_target - $compareDetails->guest_on_target) ?
-                        '     ⬆️ ' . '( ' . ($gameDetails->guest_on_target - $compareDetails->guest_on_target) . ' )' :
-                        ''
+                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_on_target - $compareDetails->guest_on_target) . ' )' :
+                    ''
                 ) . PHP_EOL .
-            "🔸   Chute para fora: " . PHP_EOL .
+            "🔸   Chute para fora: " .
                 (
                     ($compareDetails && $gameDetails->home_off_target - $compareDetails->home_off_target) ?
-                        '          ( ' . ($gameDetails->home_off_target - $compareDetails->home_off_target) . ' ) ⬆️ ' :
-                        '                          '
+                    '( ' . ($gameDetails->home_off_target - $compareDetails->home_off_target) . ' ) ⬆️ ' :
+                    ''
                 ) .
                 "     <b>" . $gameDetails->home_off_target . " x " . $gameDetails->guest_off_target . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_off_target - $compareDetails->guest_off_target) ?
-                        '     ⬆️ ' . '( ' . ($gameDetails->guest_off_target - $compareDetails->guest_off_target) . ' )' :
-                        ''
+                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_off_target - $compareDetails->guest_off_target) . ' )' :
+                    ''
                 ) . PHP_EOL .
-            "🔸   Cartões Vermelhos: "  . PHP_EOL .
+            "🔸   Cartões Vermelhos: "  .
                 (
                     ($compareDetails && $gameDetails->home_red - $compareDetails->home_red) ?
-                        '          ( ' . ($gameDetails->home_red - $compareDetails->home_red) . ' ) ⬆️ ' :
-                        '                          '
+                    '( ' . ($gameDetails->home_red - $compareDetails->home_red) . ' ) ⬆️ ' :
+                    ''
                 ) .
                 "     <b>" . $gameDetails->home_red . " x " . $gameDetails->guest_red . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_red - $compareDetails->guest_red) ?
-                        '     ⬆️ ' . '( ' . ($gameDetails->guest_red - $compareDetails->guest_red) . ' )' :
-                        ''
+                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_red - $compareDetails->guest_red) . ' )' :
+                    ''
                 );
 
         if ($gameDetails->game->half == 2) {
