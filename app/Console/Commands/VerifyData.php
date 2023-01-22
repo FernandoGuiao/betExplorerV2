@@ -134,11 +134,11 @@ class VerifyData extends Command
                 "     <b>" . $gameDetails->home_corner . " x " . $gameDetails->guest_corner . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_corner - $compareDetails->guest_corner) ?
-                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_corner - $compareDetails->guest_corner) . ' )' :
+                    '     ⬆️ ' . '( ' . ($gameDetails->guest_corner - $compareDetails->guest_corner) . ' )' :
                     ''
                 ) . PHP_EOL .
 
-            "🔸   Chute a gol: " .
+            "🔸   Chutes a gol: " .
                 (
                     ($compareDetails && $gameDetails->home_on_target - $compareDetails->home_on_target) ?
                     '( ' . ($gameDetails->home_on_target - $compareDetails->home_on_target) . ' ) ⬆️ ' :
@@ -147,10 +147,10 @@ class VerifyData extends Command
                 "     <b>" . $gameDetails->home_on_target . " x " . $gameDetails->guest_on_target . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_on_target - $compareDetails->guest_on_target) ?
-                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_on_target - $compareDetails->guest_on_target) . ' )' :
+                    '     ⬆️ ' . '( ' . ($gameDetails->guest_on_target - $compareDetails->guest_on_target) . ' )' :
                     ''
                 ) . PHP_EOL .
-            "🔸   Chute para fora: " .
+            "🔸   Chutes fora: " .
                 (
                     ($compareDetails && $gameDetails->home_off_target - $compareDetails->home_off_target) ?
                     '( ' . ($gameDetails->home_off_target - $compareDetails->home_off_target) . ' ) ⬆️ ' :
@@ -159,10 +159,10 @@ class VerifyData extends Command
                 "     <b>" . $gameDetails->home_off_target . " x " . $gameDetails->guest_off_target . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_off_target - $compareDetails->guest_off_target) ?
-                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_off_target - $compareDetails->guest_off_target) . ' )' :
+                    '     ⬆️ ' . '( ' . ($gameDetails->guest_off_target - $compareDetails->guest_off_target) . ' )' :
                     ''
                 ) . PHP_EOL .
-            "🔸   Cartões Vermelhos: "  .
+            "🔸   Cartões Verm.: "  .
                 (
                     ($compareDetails && $gameDetails->home_red - $compareDetails->home_red) ?
                     '( ' . ($gameDetails->home_red - $compareDetails->home_red) . ' ) ⬆️ ' :
@@ -171,7 +171,7 @@ class VerifyData extends Command
                 "     <b>" . $gameDetails->home_red . " x " . $gameDetails->guest_red . "</b>" .
                 (
                     ($compareDetails && $gameDetails->guest_red - $compareDetails->guest_red) ?
-                    '️ ⬆️ ' . '( ' . ($gameDetails->guest_red - $compareDetails->guest_red) . ' )' :
+                    '     ⬆️ ' . '( ' . ($gameDetails->guest_red - $compareDetails->guest_red) . ' )' :
                     ''
                 );
 
