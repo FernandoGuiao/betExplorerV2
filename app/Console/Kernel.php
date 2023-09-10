@@ -19,8 +19,8 @@ class Kernel extends ConsoleKernel
          $schedule->command('verify:data')->everyMinute();
          $schedule->command('send:telegram')->everyMinute();
          $schedule->command('telescope:prune')->daily();
+         $schedule->command('clear:database')->daily();
          $schedule->command('week:report')->weeklyOn(1, '8:00');
-
     }
 
     /**
