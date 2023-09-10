@@ -16,10 +16,10 @@ kill_timeout = 5
   DATA_URL = "https://lv.scorebing.com/ajax/score/data"
   DB_CONNECTION = "mysql"
   DB_DATABASE = "bet_explorer"
-  DB_HOST = "gru.fly-dino-mysql.internal"
-  DB_PASSWORD = "root"
+  DB_HOST = "168.138.135.207"
+  DB_PASSWORD = "pOzTnJ6Pe[)xg*oV"
   DB_PORT = "3306"
-  DB_USERNAME = "root"
+  DB_USERNAME = "bet_explorer"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
@@ -54,12 +54,4 @@ kill_timeout = 5
     handlers = ["http"]
     port = 80
 
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+  [[servic
